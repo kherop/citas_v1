@@ -13,7 +13,7 @@
         <!-- Carga archivos CSS -->
         <link type="text/css" rel="stylesheet" href="Css/app.css"/>
     </head>
-    <body>
+    <body onload="validacion()">
         <!-- Barra de navegación superior -->
         <nav>
             <a href="index.jsp">
@@ -32,14 +32,16 @@
                     </div>
 
                     <!-- Formulario de entrada -->
-                    <form name="acceso" action="Controladores/controlador_login.jsp" method="POST">
-                        <div>
-                            <input type="email" name="correo" placeholder="Introduce tu correo" required
-                                   minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
+                    <form name="acceso" action="Controladores/controlador_login.jsp" method="POST" novalidate>
+                        <div class="relative">
+                            <input type="email" name="correo" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
+                                   class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
+                            <small id="emailError" aria-live="polite"></small>
                         </div>
-                        <div>
-                            <input type="password" name="password" placeholder="Introduce tu contraseña" required
-                                   minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                        <div class="relative">
+                            <input type="password" name="password" id="password" placeholder="Introduce tu contraseña" required aria-describedby="emailPassword"
+                                   class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                            <small id="passwordError" aria-live="polite"></small>
                         </div>
                         <div>
                             <input type="submit" class="btn" name="entrar_home" value="Entrar"/>
@@ -69,5 +71,6 @@
 
         <!-- Carga archivos JS -->
         <script src="Js/app.js"></script>
+        <script src="Js/validacionLogin.js"></script>
     </body>
 </html>
