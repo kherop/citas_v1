@@ -55,7 +55,7 @@
                     <hr class="hr-white">
 
                     <!-- Enlace para recuperar la contraseña -->
-                    <a href="Vistas/cambiar_password.jsp" class="a a-white">He olvidado mi contraseña</a>
+                    <a href="Vistas/recuperar_password.jsp" class="a a-white">He olvidado mi contraseña</a>
                 </article>
 
                 <img src="Img/pareja-2.png" class="pareja-login">
