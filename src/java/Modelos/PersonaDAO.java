@@ -25,10 +25,9 @@ public class PersonaDAO {
 
     // Atributo para almacenar el resultado de la consulta SQL
     private static java.sql.ResultSet Resultado_SQL;
-    
+
     // Atributo para preparar la sentencia SQL
     private static PreparedStatement SQL_Preparada;
-    
 
     // Método para obtener todos los registros de la BDD
     public static LinkedList obtenerPersonas() {
@@ -48,11 +47,13 @@ public class PersonaDAO {
             // Si trae resultados voy creando personas y las añado al LinkedList
             while (Resultado_SQL.next()) {
                 persona = new Persona(Resultado_SQL.getInt("idUsuario"),
+                        Resultado_SQL.getString("sexo"),
                         Resultado_SQL.getString("nombre"),
                         Resultado_SQL.getString("apellido"),
-                        Resultado_SQL.getString("correo"),
+                        Resultado_SQL.getString("email"),
                         Resultado_SQL.getString("password"),
-                        Resultado_SQL.getString("img_perfil"));
+                        Resultado_SQL.getString("img_perfil"),
+                        Resultado_SQL.getBoolean("activado"));
                 personasBD.add(persona);
             }
 
@@ -63,32 +64,34 @@ public class PersonaDAO {
         ConexionEstatica.cerrarBDD();
         return personasBD;
     }
-    
-    // Método para comprabar si existe una persona pasandole el correo
-    public static Persona obtenerPersona(String correo) {
+
+    // Método para comprabar si existe una persona pasandole el email
+    public static Persona obtenerPersona(String email) {
         Persona persona = null;
 
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
             // Creo la consulta SQL, la ejecuto y la guardo
-            String sentencia = "SELECT * FROM usuarios WHERE correo = ?;";
-            
+            String sentencia = "SELECT * FROM usuarios WHERE email = ?;";
+
             // Preparo la sentencia SQL
             SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
-            SQL_Preparada.setString(1, correo);
-            
+            SQL_Preparada.setString(1, email);
+
             // Ejecuto la sentencia SQL y la guardo
             Resultado_SQL = SQL_Preparada.executeQuery();
 
             // Si trae un resultado lo guardo en un objeto persona
             if (Resultado_SQL.next()) {
                 persona = new Persona(Resultado_SQL.getInt("idUsuario"),
+                        Resultado_SQL.getString("sexo"),
                         Resultado_SQL.getString("nombre"),
                         Resultado_SQL.getString("apellido"),
-                        Resultado_SQL.getString("correo"),
+                        Resultado_SQL.getString("email"),
                         Resultado_SQL.getString("password"),
-                        Resultado_SQL.getString("img_perfil"));
+                        Resultado_SQL.getString("img_perfil"),
+                        Resultado_SQL.getBoolean("activado"));
             }
 
         } catch (SQLException ex) {
@@ -98,23 +101,23 @@ public class PersonaDAO {
         ConexionEstatica.cerrarBDD();
         return persona;
     }
-    
-    // Metodo para comprobar el login con el correo y la contraseña
-        // Método para comprabar si existe una persona pasandole el correo
-    public static boolean login(String correo, String password) {
+
+    // Metodo para comprobar el login con el email y la contraseña
+    // Método para comprabar si existe una persona pasandole el email
+    public static boolean login(String email, String password) {
         boolean existe = false;
 
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
             // Creo la consulta SQL, la ejecuto y la guardo
-            String sentencia = "SELECT * FROM usuarios WHERE correo = ? AND password = ?;";
-            
+            String sentencia = "SELECT * FROM usuarios WHERE email = ? AND password = ?;";
+
             // Preparo la sentencia SQL
             SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
-            SQL_Preparada.setString(1, correo);
+            SQL_Preparada.setString(1, email);
             SQL_Preparada.setString(2, password);
-            
+
             // Ejecuto la sentencia SQL y la guardo
             Resultado_SQL = SQL_Preparada.executeQuery();
 
@@ -129,6 +132,31 @@ public class PersonaDAO {
         // Cierro la conexión con la BDD y devuelvo el valor
         ConexionEstatica.cerrarBDD();
         return existe;
+    }
+
+    // Método para cambiar la contraseña
+    public static void cambiarPass(String password, String email) {
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "UPDATE usuarios SET password = ? WHERE email = ?;";
+            
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, password);
+            SQL_Preparada.setString(2, email);
+            
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
     }
 
 }

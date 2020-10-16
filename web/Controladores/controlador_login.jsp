@@ -19,25 +19,27 @@
     <body>
 
         <%
-            // Creo variables de sesion
-            String email;
-            String password;
 
-            // Recupero el correo y el password
-            email = request.getParameter("email");
-            password = request.getParameter("password");
+            if (request.getParameter("entrar_login") != null) {
+                // Creo variables de sesion
+                String email;
+                String password;
 
-            // Evaluo login
-            if (!PersonaDAO.login(email, password)) {
-                // Si la consulta viene vacia
-                response.sendRedirect("../Vistas/error_login.jsp");
-            } else {
-                // Si trae un valor guardo el pass del usuario para tener un referencia
-                // y lo mando al home
-                session.setAttribute("passUsuario", password);
-                response.sendRedirect("../Vistas/home.jsp");
+                // Recupero el correo y el password
+                email = request.getParameter("email");
+                password = request.getParameter("password");
+
+                // Evaluo login
+                if (!PersonaDAO.login(email, password)) {
+                    // Si la consulta viene vacia
+                    response.sendRedirect("../Vistas/error_login.jsp");
+                } else {
+                    // Si trae un valor guardo el pass del usuario para tener un referencia
+                    // y lo mando al home
+                    session.setAttribute("passUsuario", password);
+                    response.sendRedirect("../Vistas/home.jsp");
+                }
             }
-
 
         %>
     </body>

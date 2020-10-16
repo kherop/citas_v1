@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.PersonaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>home</h1>
+        <%
+        
+        System.out.println(PersonaDAO.obtenerPersona("kherop@gmail.com").toString());
+        
+        %>
     </body>
 </html>

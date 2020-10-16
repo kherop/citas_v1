@@ -1,6 +1,6 @@
 <%-- 
-    Document   : recuperar_contraseña
-    Created on : 15-oct-2020, 20:34:16
+    Document   : exito_cambio_password
+    Created on : 16-oct-2020, 15:12:03
     Author     : luis
 --%>
 
@@ -9,7 +9,7 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Recuperar password</title>
+        <title>Exito en el cambio de contraseña</title>
         <!-- Carga archivos CSS -->
         <link type="text/css" rel="stylesheet" href="../Css/app.css"/>
     </head>
@@ -29,27 +29,14 @@
                     <!-- Logo formulario -->
                     <div>
                         <h1 class="display-3 text-white">Recuperar contraseña</h1>
+                        <p class="text-white">Te hemos enviado un correo con la nueva información. Revisa tu carpeta de spam gracias.</p>
                     </div>
                     <hr class="hr-white">
 
-                    <!-- Formulario de recuperacion -->
-                    <form name="acceso" action="../Controladores/controlador_cambio_password.jsp" method="POST" novalidate>
-                        <div class="relative">
-                            <input type="email" name="email" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
-                                   class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
-                            <small id="emailError" aria-live="polite"></small>
-                        </div>
-                        <input type="submit" class="btn" name="recuperar_password" value="Solicitar nueva contraseña"/>
-                    </form>
-
                     <!-- Formulario para registrarse -->
-                    <form name="registro" action="Controladores/controlador_registro.jsp" method="POST">
-                        <input type="submit" class="btn" name="registro" value="Registrate"/>
+                    <form name="registro" action="../index.jsp" method="POST">
+                        <input type="submit" class="btn" name="volver_inicio" value="Volver"/>
                     </form>
-                    <hr class="hr-white">
-
-                    <!-- Volver -->
-                    <a href="../index.jsp" class="a a-white">Volver</a>
                 </article>
 
                 <img src="../Img/pareja-2.png" class="pareja-login">
@@ -64,7 +51,7 @@
         </footer>
 
         <!-- Carga archivos JS -->
-        <script src="../Js/app.js"></script>
-        <script src="../Js/validacionRecuperacionPass.js"></script>
+        <script src="Js/app.js"></script>
+        <script src="Js/validacionLogin.js"></script>
     </body>
 </html>
