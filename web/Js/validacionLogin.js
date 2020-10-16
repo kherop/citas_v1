@@ -80,10 +80,10 @@ function mostrarPasswordError() {
     if (password.validity.valueMissing) {
         // Si el campo está vacío
         passwordError.textContent = 'Debe introducir una contraseña.';
-    } else if (password.validity.tooShort) {
+    } else if (email.validity.typeMismatch) {
         // Si los datos son demasiado cortos
         passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
-    } else if (email.validity.typeMismatch) {
+    } else if (password.validity.tooShort) {
         // Si el campo no contiene una dirección de correo electrónico
         passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
     }

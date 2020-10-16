@@ -39,7 +39,7 @@ public class ConexionEstatica {
             
             // Creamos el objeto Statement
             Sentencia_SQL = Conexion.createStatement();
-            
+                        
             // Mandamos un mensaje por consola si la conexión ha tenido éxito
             System.out.println("Conexion realizada con éxito");
 
