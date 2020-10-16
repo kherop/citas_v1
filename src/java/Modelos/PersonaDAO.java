@@ -101,8 +101,8 @@ public class PersonaDAO {
     
     // Metodo para comprobar el login con el correo y la contraseña
         // Método para comprabar si existe una persona pasandole el correo
-    public static Persona login(String correo, String password) {
-        Persona persona = null;
+    public static boolean login(String correo, String password) {
+        boolean existe = false;
 
         try {
             // Creo una conexion
@@ -118,14 +118,9 @@ public class PersonaDAO {
             // Ejecuto la sentencia SQL y la guardo
             Resultado_SQL = SQL_Preparada.executeQuery();
 
-            // Si trae un resultado lo guardo en un objeto persona
-            if (Resultado_SQL.next()) {
-                persona = new Persona(Resultado_SQL.getInt("idUsuario"),
-                        Resultado_SQL.getString("nombre"),
-                        Resultado_SQL.getString("apellido"),
-                        Resultado_SQL.getString("correo"),
-                        Resultado_SQL.getString("password"),
-                        Resultado_SQL.getString("img_perfil"));
+            // Si
+            if (Resultado_SQL.absolute(1)) {
+                existe = true;
             }
 
         } catch (SQLException ex) {
@@ -133,7 +128,7 @@ public class PersonaDAO {
         }
         // Cierro la conexión con la BDD y devuelvo el valor
         ConexionEstatica.cerrarBDD();
-        return persona;
+        return existe;
     }
 
 }

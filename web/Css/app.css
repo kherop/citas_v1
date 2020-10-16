@@ -98,23 +98,23 @@
 }
 
 /* Diplasy fuente */
-display-1 {
+.display-1 {
     font-size: var(--rem-1);
 }
 
-display-2 {
+.display-2 {
     font-size: var(--rem-2);
 }
 
-display-3 {
+.display-3 {
     font-size: var(--rem-3);
 }
 
-display-4 {
+.display-4 {
     font-size: var(--rem-4);
 }
 
-display-5 {
+.display-5 {
     font-size: var(--rem-5);
 }
 
@@ -142,6 +142,11 @@ display-5 {
 
 .bg-blue {
     background-color: var(--color-blue);
+}
+
+/* Colores texto */
+.text-white {
+    color: var(--color-white);
 }
 
 /* Utilidades Flex Box */
@@ -322,6 +327,12 @@ input {
     bottom: 55px;
     left: 40px;
     width: 25%;
+}
+
+/* ------------------------ Página error login ------------------------------ */
+
+article.error-login {
+    border: 3px solid var(--color-red-dark);
 }
 
 

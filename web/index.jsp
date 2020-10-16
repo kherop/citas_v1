@@ -50,7 +50,7 @@
 
                     <!-- Formulario para registrarse -->
                     <form name="registro" action="Controladores/controlador_registro.jsp" method="POST">
-                        <input type="submit" class="btn" name="registro_home" value="Registrate"/>
+                        <input type="submit" class="btn" name="registro" value="Registrate"/>
                     </form>
                     <hr class="hr-white">
 
