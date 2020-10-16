@@ -32,6 +32,7 @@
                         <p class="text-white">Los datos introducidos son incorrectos, por favor vuelve a intentarlo.</p>
                     </div>
                     <hr class="hr-white">
+                    
                     <!-- Formulario de entrada -->
                     <form name="acceso" action="../Controladores/controlador_login.jsp" method="POST" novalidate>
                         <div class="relative">

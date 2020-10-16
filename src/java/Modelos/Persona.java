@@ -17,29 +17,37 @@ public class Persona {
 
     // Atributos de instancia
     int idUsuario;
+    String sexo;
     String nombre;
     String apellido;
-    String correo;
+    String email;
     String password;
     String imgPerfil;
+    boolean activado;
 
     // Constructor por defecto
     public Persona() {
     }
 
     // Constuctor con parametros
-    public Persona(int idUsuario, String nombre, String apellido, String correo, String password, String imgPerfil) {
+    public Persona(int idUsuario, String sexo, String nombre, String apellido, String email, String password, String imgPerfil, boolean activado) {
         this.idUsuario = idUsuario;
+        this.sexo = sexo;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.correo = correo;
+        this.email = email;
         this.password = password;
         this.imgPerfil = imgPerfil;
+        this.activado = activado;
     }
 
     // Métodos setter
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public void setNombre(String nombre) {
@@ -50,8 +58,8 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -62,9 +70,17 @@ public class Persona {
         this.imgPerfil = imgPerfil;
     }
 
+    public void setActivado(boolean activado) {
+        this.activado = activado;
+    }
+
     // Métodos getter
     public int getIdUsuario() {
         return idUsuario;
+    }
+
+    public String getSexo() {
+        return sexo;
     }
 
     public String getNombre() {
@@ -75,8 +91,8 @@ public class Persona {
         return apellido;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
@@ -87,18 +103,22 @@ public class Persona {
         return imgPerfil;
     }
 
-    // Método toString
-
-    @Override
-    public String toString() {
-        return "Persona{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", password=" + password + ", imgPerfil=" + imgPerfil + '}';
+    public boolean isActivado() {
+        return activado;
     }
 
+    // Método toString
+    @Override
+    public String toString() {
+        return "Persona{" + "idUsuario=" + idUsuario + ", sexo=" + sexo + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", password=" + password + ", imgPerfil=" + imgPerfil + ", activado=" + activado + '}';
+    }
 
     // Métodos de clase
     // Metodo para generar una nueva contraseña
     public static String nuevoPass() {
         String pass = "";
+        String simbolos[] = {"!", "#", "¡", "%", "_", "-", "&"};
+        String simbolo;
 
         // Genero 7 números
         for (int i = 0; i < 7; i++) {
@@ -118,7 +138,13 @@ public class Persona {
         letra = (char) c;
         
         pass += letra;
+        
+        // Genero un simbolo
+        simbolo = simbolos[(int) (Math.random() * simbolos.length)];
+        
+        pass += simbolo;
                 
         return pass;
     }
+
 }
