@@ -34,7 +34,7 @@
                     <!-- Formulario de entrada -->
                     <form name="acceso" action="Controladores/controlador_login.jsp" method="POST" novalidate>
                         <div class="relative">
-                            <input type="email" name="correo" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
+                            <input type="email" name="email" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
                                    class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
                             <small id="emailError" aria-live="polite"></small>
                         </div>
@@ -44,7 +44,7 @@
                             <small id="passwordError" aria-live="polite"></small>
                         </div>
                         <div>
-                            <input type="submit" class="btn" name="entrar_home" value="Entrar"/>
+                            <input type="submit" class="btn" name="entrar_login" value="Entrar"/>
                         </div>
                     </form>
 
