@@ -8,8 +8,8 @@ package Modelos;
 import java.util.Random;
 
 /**
- * Definición de la clase persona
- * ------------------------------
+ * Definición de la clase persona ------------------------------
+ *
  * @author Luis Quesada
  * @version 1.0
  */
@@ -17,24 +17,24 @@ public class Persona {
 
     // Atributos de instancia
     int idUsuario;
-    String sexo;
     String nombre;
     String apellido;
+    String sexo;
     String email;
     String password;
     String imgPerfil;
-    boolean activado;
+    int activado; // Boolean
 
     // Constructor por defecto
     public Persona() {
     }
 
     // Constuctor con parametros
-    public Persona(int idUsuario, String sexo, String nombre, String apellido, String email, String password, String imgPerfil, boolean activado) {
+    public Persona(int idUsuario, String nombre, String apellido, String sexo, String email, String password, String imgPerfil, int activado) {
         this.idUsuario = idUsuario;
-        this.sexo = sexo;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.sexo = sexo;
         this.email = email;
         this.password = password;
         this.imgPerfil = imgPerfil;
@@ -70,7 +70,7 @@ public class Persona {
         this.imgPerfil = imgPerfil;
     }
 
-    public void setActivado(boolean activado) {
+    public void setActivado(int activado) {
         this.activado = activado;
     }
 
@@ -103,7 +103,7 @@ public class Persona {
         return imgPerfil;
     }
 
-    public boolean isActivado() {
+    public int isActivado() {
         return activado;
     }
 
@@ -130,20 +130,20 @@ public class Persona {
         Random r = new Random();
         int c = r.nextInt(26) + (byte) 'a';
         char letra = (char) c;
-        
+
         pass += Character.toUpperCase(letra);
-        
+
         // Genero letra manistucla
         c = r.nextInt(26) + (byte) 'a';
         letra = (char) c;
-        
+
         pass += letra;
-        
+
         // Genero un simbolo
         simbolo = simbolos[(int) (Math.random() * simbolos.length)];
-        
+
         pass += simbolo;
-                
+
         return pass;
     }
 

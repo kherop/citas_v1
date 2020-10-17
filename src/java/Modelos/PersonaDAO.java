@@ -47,13 +47,13 @@ public class PersonaDAO {
             // Si trae resultados voy creando personas y las añado al LinkedList
             while (Resultado_SQL.next()) {
                 persona = new Persona(Resultado_SQL.getInt("idUsuario"),
-                        Resultado_SQL.getString("sexo"),
                         Resultado_SQL.getString("nombre"),
                         Resultado_SQL.getString("apellido"),
+                        Resultado_SQL.getString("sexo"),
                         Resultado_SQL.getString("email"),
                         Resultado_SQL.getString("password"),
                         Resultado_SQL.getString("img_perfil"),
-                        Resultado_SQL.getBoolean("activado"));
+                        Resultado_SQL.getInt("activado"));
                 personasBD.add(persona);
             }
 
@@ -85,13 +85,13 @@ public class PersonaDAO {
             // Si trae un resultado lo guardo en un objeto persona
             if (Resultado_SQL.next()) {
                 persona = new Persona(Resultado_SQL.getInt("idUsuario"),
-                        Resultado_SQL.getString("sexo"),
                         Resultado_SQL.getString("nombre"),
                         Resultado_SQL.getString("apellido"),
+                        Resultado_SQL.getString("sexo"),
                         Resultado_SQL.getString("email"),
                         Resultado_SQL.getString("password"),
                         Resultado_SQL.getString("img_perfil"),
-                        Resultado_SQL.getBoolean("activado"));
+                        Resultado_SQL.getInt("activado"));
             }
 
         } catch (SQLException ex) {
@@ -103,7 +103,6 @@ public class PersonaDAO {
     }
 
     // Metodo para comprobar el login con el email y la contraseña
-    // Método para comprabar si existe una persona pasandole el email
     public static boolean login(String email, String password) {
         boolean existe = false;
 
@@ -143,12 +142,12 @@ public class PersonaDAO {
 
             // Creo la consulta SQL, la ejecuto y la guardo
             String sentencia = "UPDATE usuarios SET password = ? WHERE email = ?;";
-            
+
             // Preparo la sentencia SQL
             SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
             SQL_Preparada.setString(1, password);
             SQL_Preparada.setString(2, email);
-            
+
             // Ejecuto la sentencia
             SQL_Preparada.executeUpdate();
         } catch (SQLException ex) {

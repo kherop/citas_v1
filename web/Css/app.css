@@ -9,7 +9,7 @@
 
 :root {
     /* Colores */
-    --color-dark: #434343;
+    --color-dark: #596665;
     --color-medium: #ced4da;
     --color-light: #f2f2f2;
     --color-white: #ffffff;
@@ -18,6 +18,7 @@
     --color-green: #48c774;
     --color-green-dark: #669c99;
     --color-blue: #87cdc9;
+    --color-blue-dark: #669c99;
 
 
     /* Colores alpha */
@@ -32,6 +33,242 @@
     --rem-4: 4rem;
     --rem-5: 5rem;
 
+}
+
+/* ------------------------------- Estructura ------------------------------- */
+/* Contenedor general de cada página */
+body {
+    font-size: 16px;
+    min-height: 100vh;
+    font-family: sans-serif;
+    color: var(--color-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../Img/bg.png");
+    background-position: center;
+    background-size: cover;
+}
+
+/* Menu superior */
+nav {
+    padding: var(--rem-1);
+    background-color: var(--color-blue);
+    width: 100%;
+}
+
+/* Contenedor */
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 80%;
+    margin: var(--rem-2);
+}
+
+/* Filas este css cambio de flex a block para hacer responsive el diseño */
+.row {
+    display: block;
+    justify-content: center;
+}
+
+/* Col - Puedo poner las que necesite dentro de la row, se divide el espacio */
+.col {
+    border-radius: calc(var(--rem-1)/4);
+    padding: var(--rem-1);
+    margin: var(--rem-0) var(--rem-1) var(--rem-1);
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    color: var(--color-light);
+    background-color: var(--color-blue);
+    padding: var(--rem-2);
+    width: 100%;
+}
+
+/* ------------------------------ Elementos ----------------------------------*/
+/* Input */
+input, select, file {
+    display: block;
+    width: 100%;
+    height: var(--rem-3);
+    padding: calc(var(--rem-1)/4) calc(var(--rem-1)/3);
+    margin-bottom: var(--rem-1);
+    font-size: var(--rem-1);
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: var(--color-blue);
+    border: 1px solid #ced4da;
+    border-radius: calc(var(--rem-1)/4);
+    transition: all 0.2s linear;
+    color: var(--color-white);
+}
+
+::placeholder {
+    color: var(--color-white);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* Subida de archivos */
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    background-color: var(--color-blue-dark);
+    color: var(--color-white);
+    text-align: center;
+    padding: calc(var(--rem-1)/4) calc(var(--rem-1)/3);
+    margin-bottom: var(--rem-1);
+    font-size: var(--rem-1);
+    font-weight: 400;
+    line-height: 1.5;
+    border: none;
+    border-radius: calc(var(--rem-1)/4);
+    transition: all 0.2s linear;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--color-dark);
+}
+
+/* Lineas */
+.hr-white {
+    border: none;
+    border-top: 1px solid var(--color-light);
+    margin-bottom: var(--rem-2);
+}
+
+.hr-red-dark {
+    border: none;
+    border-top: 1px solid var(--color-red-dark);
+    margin-bottom: var(--rem-1);
+}
+
+/* Enlaces */
+.a {
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.2s linear;
+}
+
+.a-white {
+    color: var(--color-white);
+}
+
+.a-white:hover {
+    color: var(--color-dark);
+}
+
+.a-red {
+    color: var(--color-red);
+}
+
+.a-red:hover {
+    color: var(--color-white);
+}
+
+.logo-nav {
+    height: 50px;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    padding: calc(var(--rem-1)/3);
+    color: var(--color-dark);
+    background-color: var(--color-light);
+    border-radius: 5px;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    transition: all 0.2s linear;
+}
+
+/* Tooltip para mensajes */
+.tooltip::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/* --------------------------- Página login --------------------------------- */
+
+.pareja-login {
+    position: absolute;
+    bottom: 55px;
+    left: 40px;
+    width: 25%;
+}
+
+/* ------------------------ Página error login ------------------------------ */
+
+article.error-login {
+    border: 3px solid var(--color-red-dark);
+}
+
+/* ---------------------------- Registro ------------------------------------ */
+.img_perfil_reg {
+    background-image: url(../Img/Perfil/dAPJ.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    height: 48px;
+    width: 55px;
+    margin-right: var(--rem-1);
+}
+
+
+/* Diseño campos de formualarios para errores y correctos los reutilizaremos en
+ * todos los furmularios
+ */
+.error {
+    top: 40px;
+    left: 10px;
+    color: white;
+    background-color: var(--color-red-dark);
+}
+
+.error::after {
+    left: 25%;
+    border-color: transparent transparent var(--color-red-dark) transparent;
+
+}
+
+input:focus, select:focus {
+    outline: none;
+}
+
+.campo:focus:invalid {
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    border: 1px solid var(--color-red-dark);
+}
+
+.campo:focus:valid {
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    border: 1px solid var(--color-green);
 }
 
 /* ------------------------------- Utilidades ------------------------------- */
@@ -149,7 +386,21 @@
     color: var(--color-white);
 }
 
+.text-red-dark {
+    color: var(--color-red-dark);
+}
+
+/* Display */
+.d-flex {
+    display: flex;
+}
+
+.d-inlineblock {
+    display: inline-block;
+}
+
 /* Utilidades Flex Box */
+
 .flex-grow-0 {
     flex-grow: 0;
 }
@@ -165,209 +416,6 @@
 
 .relative {
     position: relative;
-}
-
-/* ------------------------------- Estructura ------------------------------- */
-/* Contenedor general de cada página */
-body {
-    font-size: 16px;
-    min-height: 100vh;
-    font-family: sans-serif;
-    color: var(--color-dark);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url("../Img/bg.png");
-    background-position: center;
-    background-size: cover;
-}
-
-/* Menu superior */
-nav {
-    padding: var(--rem-1);
-    background-color: var(--color-blue);
-    width: 100%;
-}
-
-/* Contenedor */
-.container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    width: 80%;
-    margin: var(--rem-2);
-}
-
-/* Filas este css cambio de flex a block para hacer responsive el diseño */
-.row {
-    display: block;
-    justify-content: center;
-}
-
-/* Col - Puedo poner las que necesite dentro de la row, se divide el espacio */
-.col {
-    border-radius: calc(var(--rem-1)/4);
-    padding: var(--rem-1);
-    margin: var(--rem-0) var(--rem-1) var(--rem-1);
-    width: 100%;
-}
-
-footer {
-    text-align: center;
-    color: var(--color-light);
-    background-color: var(--color-blue);
-    padding: var(--rem-2);
-    width: 100%;
-}
-
-/* ------------------------------ Elementos ----------------------------------*/
-/* Input */
-input {
-    display: block;
-    width: 100%;
-    height: var(--rem-3);
-    padding: calc(var(--rem-1)/4) calc(var(--rem-1)/3);
-    margin-bottom: var(--rem-1);
-    font-size: var(--rem-1);
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: calc(var(--rem-1)/4);
-    transition: all 0.2s linear;
-}
-
-/* Botones */
-.btn {
-    display: inline-block;
-    font-weight: 400;
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    text-align: center;
-    padding: calc(var(--rem-1)/4) calc(var(--rem-1)/3);
-    margin-bottom: var(--rem-1);
-    font-size: var(--rem-1);
-    font-weight: 400;
-    line-height: 1.5;
-    border: none;
-    border-radius: calc(var(--rem-1)/4);
-    transition: all 0.2s linear;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #669c99;
-}
-
-/* Lineas */
-.hr-white {
-    border: none;
-    border-top: 1px solid var(--color-light);
-    margin-bottom: var(--rem-2);
-}
-
-/* Enlaces */
-.a {
-    display: inline-block;
-    text-decoration: none;
-    transition: all 0.2s linear;
-}
-
-.a-white {
-    color: var(--color-white);
-}
-
-.a-white:hover {
-    color: var(--color-dark);
-}
-
-.a-red {
-    color: var(--color-red);
-}
-
-.a-red:hover {
-    color: var(--color-white);
-}
-
-.logo-nav {
-    height: 50px;
-}
-
-.tooltip {
-    position: absolute;
-    z-index: 10;
-    padding: calc(var(--rem-1)/3);
-    color: var(--color-dark);
-    background-color: var(--color-light);
-    border-radius: 5px;
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
-    transition: all 0.2s linear;
-}
-
-/* Tooltip para mensajes */
-.tooltip::after {
-    content: " ";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
-}
-
-/* --------------------------- Página login --------------------------------- */
-
-.pareja-login {
-    position: absolute;
-    bottom: 55px;
-    left: 40px;
-    width: 25%;
-}
-
-/* ------------------------ Página error login ------------------------------ */
-
-article.error-login {
-    border: 3px solid var(--color-red-dark);
-}
-
-
-/* Diseño campos de formualarios para errores y correctos los reutilizaremos en
- * todos los furmularios
- */
-.error {
-    top: 40px;
-    left: 10px;
-    color: white;
-    background-color: var(--color-red-dark);
-}
-
-.error::after {
-    left: 25%;
-    border-color: transparent transparent var(--color-red-dark) transparent;
-
-}
-
-input:focus {
-    outline: none;
-}
-
-.campo:focus:invalid {
-    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    -moz-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    border: 1px solid var(--color-red-dark);
-}
-
-.campo:focus:valid {
-    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    -moz-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    border: 1px solid var(--color-green);
 }
 
 /* -------------------------- Media Query ------------------------------------*/
