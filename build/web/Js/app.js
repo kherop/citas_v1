@@ -1,7 +1,9 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+// Cambio de imagen de perfil cuando se carga
+function preview_img(event) {
+    var url = new FileReader();
+    url.onload = function () {
+        var imagen = document.getElementById('img_perfil');
+        imagen.style.backgroundImage = `url("${url.result}")`;
+    };
+    url.readAsDataURL(event.target.files[0]);
+}

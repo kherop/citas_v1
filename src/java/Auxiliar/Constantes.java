@@ -16,4 +16,6 @@ public class Constantes {
     public static String usuario = "luis";
     public static String password = "Chubaca2020";
     public static String ficheroBitacora = "bitacora.txt";
+    // He tenido que usar rutas absolutas para la subida con las relativas no hacia nada
+    public static String rutaImgPerfiles = "/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Img/Perfil";
 }

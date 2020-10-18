@@ -11,83 +11,147 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Inicio</title>
         <!-- Carga archivos CSS -->
-        <link type="text/css" rel="stylesheet" href="Css/app.min.css"/>
+        <link type="text/css" rel="stylesheet" href="../Css/app.css"/>
     </head>
-    <body class="min-vh-100 d-flex flex-column">
+    <body onload="validacion()">
         <!-- Barra de navegación superior -->
-        <nav class="navbar navbar-light bg-warning">
-            <a class="navbar-brand text-white font-weight-bold" href="index.jsp">
-                <img src="Img/logo.png" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+        <nav>
+            <a href="index.jsp">
+                <img src="../Img/logo_blanco.png" class="logo-nav" alt="" loading="lazy">
             </a>
         </nav>
 
         <!-- Cuerpo de la página -->
-        <div class="container flex-grow-1 d-flex justify-content-center align-items-center">
-            <div class="row w-50 m-5 p-3 shadow-lg rounded">
-                <div class="col">
 
-                    <!-- Intro registro -->
-                    <div class="d-flex justify-content-center">
-                        <h1>Registro de usuario</h1>
+        <div class="container justify-content-center">
+            <section class="row">
+                <article class="col login bg-red">
+                    <!-- Logo formulario -->
+                    <div>
+                        <h1 class="display-3 text-white">Enhorabuena...</h1>
+                        <p class="text-white">...estas a un paso de vivir grandes aventuras</p>
                     </div>
-                    <hr>
+                    <hr class="hr-white">
 
-                    <!-- Formulario de registro -->
-                    <form name="acceso" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST">
+                    <form name="registro" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                        <!-- Datos personales -->
                         <!-- Imagen de perfil -->
-                        <div class="form-group">
-                            <!--
-                            <img src="../Img/dAPJ.png" height="60" class="d-inline-block align-top mr-2" alt="" loading="lazy">
-                            -->
-                            <label>Imagen de perfil</label>
-                            <input type="file" class="form" name="imagen">
+                        <div class="relative d-flex align-items-center">
+                            <div class="img_perfil_reg" id="img_perfil"></div>
+                            <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
+                            <input id="file" type="file" name="img_perfil"  onload="img_default()" onchange="preview_img(event);"/>
                         </div>
-                        <hr>
-                        <!-- Campos datos formulario -->
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="apodo" required placeholder="Introduce tu apodo">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="correo" required placeholder="Introduce tu correo">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control"  name="password" required placeholder="Introduce tu contraseña">
-                        </div>
-                        <div class="form-group">
-                            <select class="custom-select" name="rol" required>
-                                <option disabled selected>Selecciona una rol</option>
-                                <option value="usuario">Usuario
-                                <option value="administrador">Administrador</option>
-                            </select>                        
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-info w-100" name="registrarse_registro" value="Registrar"/>
-                        </div>
-                    </form>
 
-                    <!-- Boton para volver -->
-                    <form name="registro" action="../Controladores/controlador.jsp" method="POST">
-                        <input type="submit" class="btn btn-outline-info w-100" name="volver_registro" value="Volver"/>
-                    </form>
-                    <hr>
+                        <!-- Nombre -->
+                        <div class="relative">
+                            <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre" required aria-describedby="nombreError"
+                                   class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+">
+                            <small id="nombreError" aria-live="polite"></small>
+                        </div>
 
-                    <!-- Enlace para recuperar la contraseña -->
-                    <a href="../Vistas/cambiar_pass.jsp" class="text-info">He olvidado mi contraseña</a>
-                    
-                </div>
-            </div>
+                        <!-- Apellidos -->
+                        <div class="relative">
+                            <input type="text" name="apellido" id="apellido" placeholder="Introduce tu apellido" required aria-describedby="apellidoError"
+                                   class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+">
+                            <small id="apellidoError" aria-live="polite"></small>
+                        </div>
+
+                        <!-- Genero -->
+                        <div class="relative">
+                            <select name="genero" id="genero" required aria-describedby="generoError">
+                                <option value="" disabled selected>Selecciona tu genero</option>
+                                <option value="hombre">Hombre</option>
+                                <option value="mujer">Mujer</option>
+                            </select>
+                            <small id="generoError" aria-live="polite"></small>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="relative">
+                            <input type="email" name="email" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
+                                   class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
+                            <small id="emailError" aria-live="polite"></small>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="relative">
+                            <input type="password" name="password" id="password" placeholder="Introduce tu contraseña" required aria-describedby="passwordError"
+                                   class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                            <small id="passwordError" aria-live="polite"></small>
+                        </div>
+
+                        <hr class="hr-white">
+
+                        <!-- Interes -->
+                        <h2 class="text-white">Intereses</h2>
+
+                        <!-- Tipo de relación -->
+                        <div class="relative">
+                            <select name="tipoRelacion" id="tipoRelacion" required aria-describedby="tipoRelacion">
+                                <option value="" disabled selected>Que relación buscas</option>
+                                <option value="seria">Seria</option>
+                                <option value="amistad">Amistad</option>
+                            </select>
+                            <small id="tipoRelacionError" aria-live="polite"></small>
+                        </div>
+
+                        <!-- Interesado en -->
+                        <div class="relative">
+                            <select name="busca" id="busca" required aria-describedby="buscaError">
+                                <option value="" disabled selected>Te interesan</option>
+                                <option value="chicos">Chicos</option>
+                                <option value="chicas">Chicas</option>
+                                <option value="daIgual">Me da igual</option>
+                            </select>
+                            <small id="buscaError" aria-live="polite"></small>
+                        </div>
+
+                        <!-- Hijos -->
+                        <div class="relative">
+                            <select name="hijos" id="hijos" required aria-describedby="hijosError">
+                                <option value="" disabled selected>Hijos</option>
+                                <option value="no">No quiero por el momento</option>
+                                <option value="noImp">No tengo, pero no me importaría</option>
+                                <option value="si">Si, tengo tengos</option>
+                            </select>      
+                            <small id="hijosError" aria-live="polite"></small>
+
+                        </div>
+
+                        <!-- Artísticos -->
+                        <label for="artisticos" class="text-white">Artístico: (0 - 10) Por defecto 5</label>
+                        <input type="range" id="artisticos" name="artisticos" min="0" max="10">
+
+                        <!-- Deportivos -->
+                        <label for="deportivos" class="text-white">Deportivos: (0 - 10)Por defecto 5</label>
+                        <input type="range" id="deportivos" name="deportivos" min="0" max="10">
+
+                        <!-- Políticos -->
+                        <label for="politicos" class="text-white">Políticos: (0 - 10)Por defecto 5</label>
+                        <input type="range" id="politicos" name="politicos" min="0" max="10">
+
+                        <input type="submit" class="btn" name="registro" value="Registrar"/>
+
+                    </form>
+                    <hr class="hr-white">
+
+                    <!-- Enlace para volver -->
+                    <a href="../index.jsp" class="a a-white">Volver</a>
+
+                </article>
+            </section>
         </div>
 
         <!-- Footer -->
-        <footer class="page-footer font-small cyan darken-3 bg-danger text-white">
-            <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                <a class="text-light"href="https://luisquesadadesign.com"> Luis Quesada Design</a>
+        <footer>
+            <div>© 2020 Copyright:
+                <a href="https://luisquesadadesign.com" class="a a-red"> Luis Quesada Design</a>
             </div>
         </footer>
 
         <!-- Carga archivos JS -->
-        <script src="Js/jquery-3.5.1.min.js"></script>
-        <script src="Js/bootstrap.bundle.min.js"></script>
-        <script src="Js/app.js"></script>
+        <script src="../Js/app.js"></script>
+        <script src="../Js/validacionRegistro.js"></script>
     </body>
 </html>
+

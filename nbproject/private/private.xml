@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/ConexionEstatica.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/PersonaDAO.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Controladores/controlador_login.jsp</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/index.jsp</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Css/app.css</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/registro.jsp</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Js/validacionRegistro.js</file>
         </group>
     </open-files>
 </project-private>
