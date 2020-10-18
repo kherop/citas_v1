@@ -4,6 +4,9 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.AsignacionRolesDAO"%>
+<%@page import="Modelos.InteresesDAO"%>
+<%@page import="Modelos.PersonaDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Auxiliar.Constantes"%>
@@ -49,8 +52,8 @@
                         // Pero antes le cambio el nombre mediante la fecha para hacerla unica
                         Calendar cal = Calendar.getInstance();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-mm");
-                        String nuevoNombre = (dateFormat.format(cal.getTime()) + campo.getName()).replace(" ","");
-                        
+                        String nuevoNombre = (dateFormat.format(cal.getTime()) + campo.getName()).replace(" ", "");
+
                         // Se crea el archivo y se guarda en el directorio
                         File fichero = new File(Constantes.rutaImgPerfiles, nuevoNombre);
                         campo.write(fichero);
@@ -72,25 +75,40 @@
                 System.out.println(string);
             }
 
-            /*
-                    // Se prepara todo para insertar el nuevo usuario en la BDD
-                    String tabla = "usuarios";
-                    String apodo = datosUsuario.get(1);
-                    String correo = datosUsuario.get(2);
-                    String password = datosUsuario.get(3);
-                    int victorias = 0;
-                    int derrotas = 0;
-                    String rol = datosUsuario.get(4);
-                    String img_nombre = datosUsuario.get(0);
-            
-                    // Inserto en la base de datos
-                    ConexionEstatica.insertarUsuario(tabla, apodo, correo, password, victorias, derrotas, rol, img_nombre);
+            // Preparado los datos del formulario
+            String img_perfil = datosUsuario.get(0);
+            String nombre = datosUsuario.get(1);
+            String apellido = datosUsuario.get(2);
+            String genero = datosUsuario.get(3);
+            String email = datosUsuario.get(4);
+            String password = datosUsuario.get(5);
+            String busca = datosUsuario.get(6);
+            String tipoRelacion = datosUsuario.get(7);
+            String hijos = datosUsuario.get(8);
+            int artisticos = Integer.parseInt(datosUsuario.get(9));
+            int deportivos = Integer.parseInt(datosUsuario.get(10));
+            int politicos = Integer.parseInt(datosUsuario.get(11));
 
-                    // Guardo datos en la sesion para tener una referencia al usuario
-                    session.setAttribute("correoUsuario", correo);
-                    session.setAttribute("rolUsuario", rol);
-                    response.sendRedirect("../Vistas/exito_registro.jsp");
+            /* Cuando se registra un usuario hay que insertar en 3 tablas
+             * Tabla de usuario -> Datos de usuario
+             * Tabla de intereses -> Intereses de usuario
+             * Tabla de asiginación de roles, el rol por defecto sera usuario,
+             * despues si el administrador podra cambiar este rol en su
+             * panel de control
              */
+            
+            // Insert en la tabla usuarios con activacion a 0 por defecto y con idUsuario asignado por la BDD
+            PersonaDAO.nuevaPersona(nombre, apellido, genero, email, password, img_perfil);
+            
+            // Guardo los intereses del usuario asociados al email
+            InteresesDAO.nuevosIntereses(email, busca, tipoRelacion, hijos, artisticos, deportivos, politicos);
+            
+            // Establezco el rol por defecto
+            AsignacionRolesDAO.nuevoRol(email);
+
+            // Guardo datos en la sesion para tener una referencia al usuario
+            response.sendRedirect("../Vistas/exito_registro.jsp");
+
         %>
 
     </body>

@@ -49,7 +49,7 @@ public class PersonaDAO {
                 persona = new Persona(Resultado_SQL.getInt("idUsuario"),
                         Resultado_SQL.getString("nombre"),
                         Resultado_SQL.getString("apellido"),
-                        Resultado_SQL.getString("sexo"),
+                        Resultado_SQL.getString("genero"),
                         Resultado_SQL.getString("email"),
                         Resultado_SQL.getString("password"),
                         Resultado_SQL.getString("img_perfil"),
@@ -87,7 +87,7 @@ public class PersonaDAO {
                 persona = new Persona(Resultado_SQL.getInt("idUsuario"),
                         Resultado_SQL.getString("nombre"),
                         Resultado_SQL.getString("apellido"),
-                        Resultado_SQL.getString("sexo"),
+                        Resultado_SQL.getString("genero"),
                         Resultado_SQL.getString("email"),
                         Resultado_SQL.getString("password"),
                         Resultado_SQL.getString("img_perfil"),
@@ -156,6 +156,36 @@ public class PersonaDAO {
 
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
+    }
+
+    // Método para insertar un nuevo usuario
+    public static void nuevaPersona(String nombre, String apellido, String genero, String email, String password, String img_perfil) {
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "INSERT INTO usuarios (nombre, apellido, genero, email, password, img_perfil) VALUES (?, ?, ?, ?, ?, ?);";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, nombre);
+            SQL_Preparada.setString(2, apellido);
+            SQL_Preparada.setString(3, genero);
+            SQL_Preparada.setString(4, email);
+            SQL_Preparada.setString(5, password);
+            SQL_Preparada.setString(6, img_perfil);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+
     }
 
 }

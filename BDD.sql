@@ -126,15 +126,15 @@ select * from usuarios where correo = 'kherop@gmail.com' and password = '!123456
 
 ALTER TABLE `usuarios` ADD `activado` BOOLEAN NOT NULL AFTER `img_perfil`;
 
-SELECT * FROM usuarios WHERE email = 'kherop@gmail.com' AND password = '!1234567aA';
 
+update usuarios set password = '!1234567aA' where email = 'kherop@gmail.com';
 
-UPDATE usuarios SET password = '1234567aA!' WHERE email = 'kherop@gmail.com';
+select * from asignacionRoles;
 
-update usuarios set sexo = 'hombre' where email = 'kherop@gmail.com';
+INSERT INTO usuarios (nombre, apellido, genero, email, password, img_perfil) VALUES (?, ?, ?, ?, ?, ?);
 
+SELECT idUsuario FROM usuarios WHERE email = 'kherop@gmail.com';
 
-
-
+INSERT INTO preferencias (idUsuario, tipoRelacion, hijos, artistico, deportivo, politico) VALUES((SELECT idUsuario FROM usuarios WHERE email = 'kherop@gmail.com'), 'amistad', 'chicas', 'noImp', 8, 7, 6);
 
 

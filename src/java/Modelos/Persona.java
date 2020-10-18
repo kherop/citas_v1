@@ -19,7 +19,7 @@ public class Persona {
     int idUsuario;
     String nombre;
     String apellido;
-    String sexo;
+    String genero;
     String email;
     String password;
     String imgPerfil;
@@ -30,15 +30,26 @@ public class Persona {
     }
 
     // Constuctor con parametros
-    public Persona(int idUsuario, String nombre, String apellido, String sexo, String email, String password, String imgPerfil, int activado) {
+    public Persona(int idUsuario, String nombre, String apellido, String genero, String email, String password, String imgPerfil, int activado) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.sexo = sexo;
+        this.genero = genero;
         this.email = email;
         this.password = password;
         this.imgPerfil = imgPerfil;
         this.activado = activado;
+    }
+    
+    // Constuctor sin id de usuario para lo genere la BDD de forma automatica y desactivado, activado = 0 esta default en la BDD
+    public Persona(String nombre, String apellido, String genero, String email, String password, String imgPerfil) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.genero = genero;
+        this.email = email;
+        this.password = password;
+        this.imgPerfil = imgPerfil;
+
     }
 
     // Métodos setter
@@ -46,8 +57,8 @@ public class Persona {
         this.idUsuario = idUsuario;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public void setNombre(String nombre) {
@@ -79,8 +90,8 @@ public class Persona {
         return idUsuario;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getGenero() {
+        return genero;
     }
 
     public String getNombre() {
@@ -110,7 +121,7 @@ public class Persona {
     // Método toString
     @Override
     public String toString() {
-        return "Persona{" + "idUsuario=" + idUsuario + ", sexo=" + sexo + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", password=" + password + ", imgPerfil=" + imgPerfil + ", activado=" + activado + '}';
+        return "Persona{" + "idUsuario=" + idUsuario + ", genero=" + genero + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", password=" + password + ", imgPerfil=" + imgPerfil + ", activado=" + activado + '}';
     }
 
     // Métodos de clase
