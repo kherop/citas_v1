@@ -34,10 +34,16 @@
                     // Si la consulta viene vacia
                     response.sendRedirect("../Vistas/error_login.jsp");
                 } else {
-                    // Si trae un valor guardo el pass del usuario para tener un referencia
-                    // y lo mando al home
-                    session.setAttribute("passUsuario", password);
-                    response.sendRedirect("../Vistas/home.jsp");
+
+                    // Evaluo si el usuario esta activo o no
+                    if (PersonaDAO.usuarioActivado(email)) {
+                        // Si esta activo guardo el email en la sesion y lo redirijo al homr
+                        session.setAttribute("emailUsuario", email);
+                        response.sendRedirect("../Vistas/home.jsp");
+                    } else {
+                        // Si no esta activo lo redirijo a la pagina
+                        response.sendRedirect("../Vistas/no_activo.jsp");
+                    }
                 }
             }
 

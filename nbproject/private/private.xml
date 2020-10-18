@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/ConexionEstatica.java</file>
             <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/PersonaDAO.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/AsignacionRolesDAO.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/AsignacionRoles.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Controladores/controlador_registro.jsp</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/Intereses.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/Persona.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/InteresesDAO.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/exito_registro.jsp</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/no_activo.jsp</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Controladores/controlador_login.jsp</file>
         </group>
     </open-files>
 </project-private>

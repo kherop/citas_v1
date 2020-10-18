@@ -120,7 +120,7 @@ public class PersonaDAO {
             // Ejecuto la sentencia SQL y la guardo
             Resultado_SQL = SQL_Preparada.executeQuery();
 
-            // Si
+            // Si la consulta trae un resultado exite
             if (Resultado_SQL.absolute(1)) {
                 existe = true;
             }
@@ -185,7 +185,40 @@ public class PersonaDAO {
 
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
+    }
 
+    // Método para saber si un usuario esta activado
+    public static boolean usuarioActivado(String email) {
+        boolean activado = false;
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "SELECT activado FROM usuarios WHERE email = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, email);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo evaluo
+            if (Resultado_SQL.next()) {
+                // Recupero el resultado y evaluo si esta activado o no
+                int resultado = Resultado_SQL.getInt("activado");
+                if (resultado == 1) {
+                    activado = true;
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo el valor
+        ConexionEstatica.cerrarBDD();
+        return activado;
     }
 
 }
