@@ -71,8 +71,10 @@ function mostrarEmailError() {
         emailError.textContent = 'El correo electrónico debe tener al menos ${ email.minLength } caracteres; ha introducido ${ email.value.length }.';
     }
 
-    // Establece el estilo apropiado
-    emailError.className = 'error tooltip';
+    // Establece el estilo apropiado sino es valido
+    if (!email.validity.valid) {
+        emailError.className = 'error tooltip';
+    }
 }
 
 // Función para mostrar los errores del password
@@ -80,35 +82,38 @@ function mostrarPasswordError() {
     if (password.validity.valueMissing) {
         // Si el campo está vacío
         passwordError.textContent = 'Debe introducir una contraseña.';
-    } else if (email.validity.typeMismatch) {
+    } else if (password.validity.typeMismatch) {
         // Si los datos son demasiado cortos
         passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
     } else if (password.validity.tooShort) {
         // Si el campo no contiene una dirección de correo electrónico
         passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
     }
-    // Establece el estilo apropiado
-    passwordError.className = 'error tooltip';
+    
+    // Establece el estilo apropiado sino es valido
+    if (!password.validity.valid) {
+        passwordError.className = 'error tooltip';
+    }
 }
 
 /* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
+// Email
 email.addEventListener("blur", function(e) {
     emailError.className = 'error';
     emailError.innerHTML = '';
 }, true);
 
 email.addEventListener("focus", function(e) {
-    emailError.className = 'error tooltip';
     mostrarEmailError();
 }, true);
 
+// Password
 password.addEventListener("blur", function(e) {
     passwordError.className = 'error';
     passwordError.innerHTML = '';
 }, true);
 
 password.addEventListener("focus", function(e) {
-    passwordError.className = 'error tooltip';
     mostrarPasswordError();
 }, true);
 

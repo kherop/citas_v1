@@ -1,9 +1,3 @@
-// Cambio de texto en la caja de seleccion de la imagen de perfil
-function cambiarTexto(oFileInput, sTargetID) {
-    document.getElementById(sTargetID).value = oFileInput.value;
-}
-
-
 // Cambio de imagen de perfil cuando se carga
 function preview_img(event) {
     var url = new FileReader();

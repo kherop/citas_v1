@@ -52,17 +52,18 @@ function mostrarEmailError() {
         emailError.textContent = 'El correo electrónico debe tener al menos ${ email.minLength } caracteres; ha introducido ${ email.value.length }.';
     }
 
-    // Establece el estilo apropiado
-    emailError.className = 'error tooltip';
+    // Establece el estilo apropiado sino es valido
+    if (!email.validity.valid) {
+        emailError.className = 'error tooltip';
+    }
 }
 
 /* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
-email.addEventListener("blur", function(e) {
+email.addEventListener("blur", function (e) {
     emailError.className = 'error';
     emailError.innerHTML = '';
 }, true);
 
-email.addEventListener("focus", function(e) {
-    emailError.className = 'error tooltip';
+email.addEventListener("focus", function (e) {
     mostrarEmailError();
 }, true);

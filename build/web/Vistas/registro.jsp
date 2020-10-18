@@ -33,13 +33,13 @@
                     </div>
                     <hr class="hr-white">
 
-                    <form name="acceso" action="Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                    <form name="registro" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
                         <!-- Datos personales -->
                         <!-- Imagen de perfil -->
-                        <div class="relative d-flex">
+                        <div class="relative d-flex align-items-center">
                             <div class="img_perfil_reg" id="img_perfil"></div>
-                            <input id="txt" type="text" value="Elige imagen de perfil" onclick="javascript:document.getElementById('file').click();">
-                            <input id="file" type="file" style="visibility: hidden;" name="img_perfil" onchange="preview_img(event); cambiarTexto(this, 'txt');"/>
+                            <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
+                            <input id="file" type="file" name="img_perfil"  onload="img_default()" onchange="preview_img(event);"/>
                         </div>
 
                         <!-- Nombre -->
@@ -55,13 +55,15 @@
                                    class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+">
                             <small id="apellidoError" aria-live="polite"></small>
                         </div>
-                        <!-- Sexo -->
+
+                        <!-- Genero -->
                         <div class="relative">
-                            <select class="custom-select" name="rol" required>
-                                <option disabled selected>Selecciona tu genero</option>
-                                <option value="usuario">Hombre</option>
-                                <option value="administrador">Mujer</option>
-                            </select>                        
+                            <select name="genero" id="genero" required aria-describedby="generoError">
+                                <option value="" disabled selected>Selecciona tu genero</option>
+                                <option value="hombre">Hombre</option>
+                                <option value="mujer">Mujer</option>
+                            </select>
+                            <small id="generoError" aria-live="polite"></small>
                         </div>
 
                         <!-- Email -->
@@ -73,7 +75,7 @@
 
                         <!-- Password -->
                         <div class="relative">
-                            <input type="password" name="password" id="password" placeholder="Introduce tu contraseña" required aria-describedby="emailPassword"
+                            <input type="password" name="password" id="password" placeholder="Introduce tu contraseña" required aria-describedby="passwordError"
                                    class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
                             <small id="passwordError" aria-live="polite"></small>
                         </div>
@@ -85,36 +87,50 @@
 
                         <!-- Tipo de relación -->
                         <div class="relative">
-                            <select class="custom-select" name="rol" required>
-                                <option disabled selected>Que relación buscas</option>
-                                <option value="usuario">Seria</option>
-                                <option value="administrador">Amistad</option>
-                            </select>                        
+                            <select name="tipoRelacion" id="tipoRelacion" required aria-describedby="tipoRelacion">
+                                <option value="" disabled selected>Que relación buscas</option>
+                                <option value="seria">Seria</option>
+                                <option value="amistad">Amistad</option>
+                            </select>
+                            <small id="tipoRelacionError" aria-live="polite"></small>
+                        </div>
+
+                        <!-- Interesado en -->
+                        <div class="relative">
+                            <select name="busca" id="busca" required aria-describedby="buscaError">
+                                <option value="" disabled selected>Te interesan</option>
+                                <option value="chicos">Chicos</option>
+                                <option value="chicas">Chicas</option>
+                                <option value="daIgual">Me da igual</option>
+                            </select>
+                            <small id="buscaError" aria-live="polite"></small>
                         </div>
 
                         <!-- Hijos -->
                         <div class="relative">
-                            <select class="custom-select" name="rol" required>
-                                <option disabled selected>Hijos</option>
-                                <option value="usuario">No quiero por el momento</option>
-                                <option value="administrador">No tengo, pero no me importaría</option>
-                                <option value="administrador">Si, tengo tengos</option>
-                            </select>                        
+                            <select name="hijos" id="hijos" required aria-describedby="hijosError">
+                                <option value="" disabled selected>Hijos</option>
+                                <option value="no">No quiero por el momento</option>
+                                <option value="noImp">No tengo, pero no me importaría</option>
+                                <option value="si">Si, tengo tengos</option>
+                            </select>      
+                            <small id="hijosError" aria-live="polite"></small>
+
                         </div>
 
                         <!-- Artísticos -->
-                        <label for="artisticos" class="text-white">Artístico: (0 - 10) 5 Por defecto</label>
+                        <label for="artisticos" class="text-white">Artístico: (0 - 10) Por defecto 5</label>
                         <input type="range" id="artisticos" name="artisticos" min="0" max="10">
 
                         <!-- Deportivos -->
-                        <label for="deportivos" class="text-white">Deportivos: (0 - 10) 5 Por defecto</label>
+                        <label for="deportivos" class="text-white">Deportivos: (0 - 10)Por defecto 5</label>
                         <input type="range" id="deportivos" name="deportivos" min="0" max="10">
 
                         <!-- Políticos -->
-                        <label for="politicos" class="text-white">Políticos: (0 - 10) 5 Por defecto</label>
+                        <label for="politicos" class="text-white">Políticos: (0 - 10)Por defecto 5</label>
                         <input type="range" id="politicos" name="politicos" min="0" max="10">
 
-                        <input type="submit" class="btn" name="entrar_login" value="Entrar"/>
+                        <input type="submit" class="btn" name="registro" value="Registrar"/>
 
                     </form>
                     <hr class="hr-white">
@@ -135,7 +151,7 @@
 
         <!-- Carga archivos JS -->
         <script src="../Js/app.js"></script>
-        <script src="../Js/validacionLogin.js"></script>
+        <script src="../Js/validacionRegistro.js"></script>
     </body>
 </html>
 
