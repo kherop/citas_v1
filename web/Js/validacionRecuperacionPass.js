@@ -4,7 +4,6 @@
  */
 
 // Variables
-//
 // Formulario
 const formulario = document.getElementsByTagName('form')[0];
 
@@ -17,16 +16,17 @@ const emailError = document.getElementById('emailError');
 // usuario si hay errores o no mientras interactua con el formulario
 function validacion() {
 
-    // EventListener email
-    email.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (email.validity.valid) {
-            emailError.innerHTML = '';
-            emailError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarEmailError();
-        }
-    });
+    /* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
+    email.addEventListener("blur", function (e) {
+        emailError.className = 'error';
+        emailError.innerHTML = '';
+    }, true);
+
+    email.addEventListener("focus", function (e) {
+        mostrarEmailError();
+        quitarError(emailError);
+
+    }, true);
 
     // EvenListener para controlar el envio del formulario
     formulario.addEventListener('submit', function (event) {
@@ -58,12 +58,10 @@ function mostrarEmailError() {
     }
 }
 
-/* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
-email.addEventListener("blur", function (e) {
-    emailError.className = 'error';
-    emailError.innerHTML = '';
-}, true);
+function quitarError(campo) {
+    setTimeout(function () {
+        campo.className = 'error';
+        campo.innerHTML = '';
+    }, 1500);
 
-email.addEventListener("focus", function (e) {
-    mostrarEmailError();
-}, true);
+}

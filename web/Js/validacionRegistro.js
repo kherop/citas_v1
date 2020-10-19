@@ -45,93 +45,60 @@ const passwordError = document.getElementById('passwordError');
 // usuario si hay errores o no mientras interactua con el formulario
 function validacion() {
 
-    // EventListener nombre
-    nombre.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (nombre.validity.valid) {
-            nombreError.innerHTML = '';
-            nombreError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarNombreError();
-        }
-    });
+    /* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
+    // Email
+    email.addEventListener("blur", function (e) {
+        emailError.className = 'error';
+        emailError.innerHTML = '';
+    }, true);
 
-    // EventListener apellido
-    apellido.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (apellido.validity.valid) {
-            apellidoError.innerHTML = '';
-            apellidoError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarApellidoError();
-        }
-    });
+    email.addEventListener("focus", function (e) {
+        mostrarEmailError();
+        quitarError(emailError);
 
-    // EventListener genero
-    genero.addEventListener('select', function (e) {
-        // Si es valido eliminamos el error
-        if (genero.Validity.valid) {
-            generoError.innerHTML = '';
-            generoError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarGeneroError();
-        }
-    });
+    }, true);
 
-    // EventListener email
-    email.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (email.validity.valid) {
-            emailError.innerHTML = '';
-            emailError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarEmailError();
-        }
-    });
+    // Password
+    password.addEventListener("blur", function (e) {
+        passwordError.className = 'error';
+        passwordError.innerHTML = '';
+    }, true);
 
-    // EventListener password
-    password.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (password.validity.valid) {
-            passwordError.innerHTML = '';
-            passwordError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarPasswordError();
-        }
-    });
+    password.addEventListener("focus", function (e) {
+        mostrarPasswordError();
+        quitarError(passwordError);
 
-    // EventListener tipoRelacion
-    tipoRelacion.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (tipoRelacion.validity.valid) {
-            tipoRelacionError.innerHTML = '';
-            tipoRelacionError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarTipoRelacionError();
-        }
-    });
+    }, true);
 
-    // EventListener busca
-    busca.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (busca.validity.valid) {
-            buscaError.innerHTML = '';
-            buscaError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarBuscaError();
-        }
-    });
+    // Nombre
+    nombre.addEventListener("blur", function (e) {
+        nombreError.className = 'error';
+        nombreError.innerHTML = '';
+    }, true);
 
-    // EventListener hijos
-    hijos.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (hijos.validity.valid) {
-            hijosError.innerHTML = '';
-            hijosError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarHijosError();
-        }
-    });
+    nombre.addEventListener("focus", function (e) {
+        mostrarNombreError();
+        quitarError(nombreError);
+
+    }, true);
+
+    // Apellido
+    apellido.addEventListener("blur", function (e) {
+        apellidoError.className = 'error';
+        apellidoError.innerHTML = '';
+    }, true);
+
+    apellido.addEventListener("focus", function (e) {
+        mostrarApellidoError();
+        quitarError(apellidoError);
+
+    }, true);
+
+    // Este listene arregla un bug que lo deja activo, si me la tiempo lo depurare
+    genero.addEventListener("blur", function (e) {
+        generoError.className = 'error';
+        generoError.innerHTML = '';
+    }, true);
 
     // EvenListener para controlar el envio del formulario
     formulario.addEventListener('submit', function (event) {
@@ -256,7 +223,7 @@ function mostrarPasswordError() {
         // Si el campo no contiene una dirección de correo electrónico
         passwordError.textContent = '8-10 caracteres, un simbolo, una letra mayuscula y una minuscula.';
     }
-    
+
     // Establece el estilo apropiado sino es valido
     if (!password.validity.valid) {
         passwordError.className = 'error tooltip';
@@ -299,54 +266,11 @@ function mostrarHijosError() {
     }
 }
 
-/* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
-// Email
-email.addEventListener("blur", function (e) {
-    emailError.className = 'error';
-    emailError.innerHTML = '';
-}, true);
+// Funcion para eliminar el error al segundo y medio de hacer focus y no molestar al usuario
+function quitarError(campo) {
+    setTimeout(function () {
+        campo.className = 'error';
+        campo.innerHTML = '';
+    }, 1500);
 
-email.addEventListener("focus", function (e) {
-    mostrarEmailError();
-}, true);
-
-// Password
-password.addEventListener("blur", function (e) {
-    passwordError.className = 'error';
-    passwordError.innerHTML = '';
-}, true);
-
-password.addEventListener("focus", function (e) {
-    mostrarPasswordError();
-}, true);
-
-// Nombre
-nombre.addEventListener("blur", function (e) {
-    nombreError.className = 'error';
-    nombreError.innerHTML = '';
-}, true);
-
-nombre.addEventListener("focus", function (e) {
-    mostrarNombreError();
-}, true);
-
-// Apellido
-apellido.addEventListener("blur", function (e) {
-    apellidoError.className = 'error';
-    apellidoError.innerHTML = '';
-}, true);
-
-apellido.addEventListener("focus", function (e) {
-    mostrarApellidoError();
-}, true);
-
-// Apellido, este listene arregla un bug que lo deja activo, si me la tiempo lo depurare
-genero.addEventListener("blur", function (e) {
-    generoError.className = 'error';
-    generoError.innerHTML = '';
-}, true);
-
-/*
- * Para los select no hago el efecto de pone el mensaje al poner y quitar el 
- * focus porque queda muy incomodo para el usuario
- */
+}

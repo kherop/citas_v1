@@ -22,7 +22,7 @@ const passwordError = document.getElementById('passwordError');
 function validacion() {
 
     /* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
-// Email
+    // Email
     email.addEventListener("blur", function (e) {
         emailError.className = 'error';
         emailError.innerHTML = '';
@@ -30,9 +30,10 @@ function validacion() {
 
     email.addEventListener("focus", function (e) {
         mostrarEmailError();
+        quitarError(emailError);
     }, true);
 
-// Password
+    // Password
     password.addEventListener("blur", function (e) {
         passwordError.className = 'error';
         passwordError.innerHTML = '';
@@ -40,6 +41,7 @@ function validacion() {
 
     password.addEventListener("focus", function (e) {
         mostrarPasswordError();
+        quitarError(passwordError);
     }, true);
 
 
@@ -93,4 +95,13 @@ function mostrarPasswordError() {
     if (!password.validity.valid) {
         passwordError.className = 'error tooltip';
     }
+}
+
+// Funcion para eliminar el error al segundo y medio de hacer focus y no molestar al usuario
+function quitarError(campo) {
+    setTimeout(function () {
+        campo.className = 'error';
+        campo.innerHTML = '';
+    }, 1500);
+
 }

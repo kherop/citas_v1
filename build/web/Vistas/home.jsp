@@ -22,6 +22,15 @@
             <a href="index.jsp">
                 <img src="../Img/logo_blanco.png" class="logo-nav" alt="" loading="lazy">
             </a>
+
+            <div>
+                <ul>
+                    <li><a href="#"><i class="material-icons">face</i></a></li>
+                    <li><a href="#"><i class="material-icons">face</i></a></li>
+                    <li><a href="#"><i class="material-icons">face</i></a></li>
+                </ul>
+            </div>
+
         </nav>
 
         <!-- Cuerpo de la página -->
