@@ -22,7 +22,7 @@
     <body onload="validacion()">
         <!-- Barra de navegación superior -->
         <nav>
-            <a href="index.jsp">
+            <a href="../index.jsp">
                 <img src="../Img/logo_blanco.png" class="logo-nav" alt="" loading="lazy">
             </a>
         </nav>
@@ -31,7 +31,7 @@
 
         <div class="container justify-content-center">
             <section class="row">
-                <article class="col login bg-red">
+                <article class="col login bg-red border-radius">
                     <!-- Logo formulario -->
                     <div>
                         <h1 class="display-3 text-white">Enhorabuena...</h1>

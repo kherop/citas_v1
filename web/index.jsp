@@ -25,7 +25,7 @@
 
         <div class="container justify-content-center">
             <section class="row">
-                <article class="col login bg-red">
+                <article class="col login bg-red border-radius">
                     <!-- Logo formulario -->
                     <div>
                         <img src="Img/logo_blanco.png" class="logo-nav" alt="" loading="lazy">

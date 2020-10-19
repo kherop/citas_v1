@@ -7,3 +7,11 @@ function preview_img(event) {
     };
     url.readAsDataURL(event.target.files[0]);
 }
+
+// Funcion para collapsar y expandir el menu lateral
+function ctrlMenuLateral() {
+    const menu = document.getElementById('menu-lateral');
+    // Cambio la clase del menu
+    menu.classList.toggle('menu-collapse');
+    menu.classList.toggle('menu-expand');
+}
