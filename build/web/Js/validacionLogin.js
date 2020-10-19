@@ -21,27 +21,27 @@ const passwordError = document.getElementById('passwordError');
 // usuario si hay errores o no mientras interactua con el formulario
 function validacion() {
 
-    // EventListener email
-    email.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (email.validity.valid) {
-            emailError.innerHTML = '';
-            emailError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarEmailError();
-        }
-    });
+    /* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
+// Email
+    email.addEventListener("blur", function (e) {
+        emailError.className = 'error';
+        emailError.innerHTML = '';
+    }, true);
 
-    // EventListener password
-    password.addEventListener('input', function (e) {
-        // Si es valido eliminamos el error
-        if (password.validity.valid) {
-            passwordError.innerHTML = '';
-            passwordError.className = 'error';
-        } else { // Si tiene un error lo mostramos
-            mostrarPasswordError();
-        }
-    });
+    email.addEventListener("focus", function (e) {
+        mostrarEmailError();
+    }, true);
+
+// Password
+    password.addEventListener("blur", function (e) {
+        passwordError.className = 'error';
+        passwordError.innerHTML = '';
+    }, true);
+
+    password.addEventListener("focus", function (e) {
+        mostrarPasswordError();
+    }, true);
+
 
     // EvenListener para controlar el envio del formulario
     formulario.addEventListener('submit', function (event) {
@@ -55,7 +55,6 @@ function validacion() {
             event.preventDefault();
         }
     });
-
 }
 
 // Función para mostrar los errores del email
@@ -63,8 +62,8 @@ function mostrarEmailError() {
     if (email.validity.valueMissing) {
         // Si el campo está vacío
         emailError.textContent = 'Debe introducir una dirección de correo electrónico.';
-    } else if (email.validity.typeMismatch) {
-        // Si el campo no contiene una dirección de correo electrónico
+    } else if (email.validity.patternMismatch) {
+        // Si el password no sigue el patrón
         emailError.textContent = 'El valor introducido debe ser una dirección de correo electrónico.';
     } else if (email.validity.tooShort) {
         // Si los datos son demasiado cortos
@@ -82,38 +81,16 @@ function mostrarPasswordError() {
     if (password.validity.valueMissing) {
         // Si el campo está vacío
         passwordError.textContent = 'Debe introducir una contraseña.';
-    } else if (password.validity.typeMismatch) {
-        // Si los datos son demasiado cortos
-        passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
     } else if (password.validity.tooShort) {
         // Si el campo no contiene una dirección de correo electrónico
-        passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
+        passwordError.textContent = '8-10 caracteres, un simbolo, una letra mayuscula y una minuscula.';
+    } else if (password.validity.patternMismatch) {
+        // Si los datos son demasiado cortos
+        passwordError.textContent = '8-10 caracteres, un simbolo, una letra mayuscula y una minuscula.';
     }
-    
+
     // Establece el estilo apropiado sino es valido
     if (!password.validity.valid) {
         passwordError.className = 'error tooltip';
     }
 }
-
-/* Con estos eventListener controlo la perdida de focus y cuando lo ganan para mostrar y quitar el error */
-// Email
-email.addEventListener("blur", function(e) {
-    emailError.className = 'error';
-    emailError.innerHTML = '';
-}, true);
-
-email.addEventListener("focus", function(e) {
-    mostrarEmailError();
-}, true);
-
-// Password
-password.addEventListener("blur", function(e) {
-    passwordError.className = 'error';
-    passwordError.innerHTML = '';
-}, true);
-
-password.addEventListener("focus", function(e) {
-    mostrarPasswordError();
-}, true);
-

@@ -249,13 +249,14 @@ function mostrarPasswordError() {
     if (password.validity.valueMissing) {
         // Si el campo está vacío
         passwordError.textContent = 'Debe introducir una contraseña.';
-    } else if (password.validity.typeMismatch) {
+    } else if (password.validity.patternMismatch) {
         // Si los datos son demasiado cortos
-        passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
+        passwordError.textContent = '8-10 caracteres, un simbolo, una letra mayuscula y una minuscula.';
     } else if (password.validity.tooShort) {
         // Si el campo no contiene una dirección de correo electrónico
-        passwordError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
+        passwordError.textContent = '8-10 caracteres, un simbolo, una letra mayuscula y una minuscula.';
     }
+    
     // Establece el estilo apropiado sino es valido
     if (!password.validity.valid) {
         passwordError.className = 'error tooltip';
