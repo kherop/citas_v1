@@ -37,7 +37,9 @@
                         <!-- Datos personales -->
                         <!-- Imagen de perfil -->
                         <div class="relative d-flex align-items-center">
-                            <div class="img_perfil_reg" id="img_perfil"></div>
+                            <div class="img_perfil_aside m-1">
+                                <img src="../Img/Perfil/dAPJ.png" id="imgPerfil">
+                            </div>
                             <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
                             <input id="file" type="file" name="img_perfil" onchange="previewImg(event);"/>
                         </div>

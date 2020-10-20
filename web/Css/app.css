@@ -146,12 +146,12 @@ aside.col {
     display: none;
 }
 
-.menu-collapse .img_perfil_home {
+.menu-collapse .img_perfil_aside {
     height: 45px;
     width: 45px;
 }
 
-.img_perfil_home, .menu-collapse span, .menu-collapse p {
+.img_perfil_aside, .menu-collapse span, .menu-collapse p {
     transition: all 0.2s linear;
 }
 
@@ -356,7 +356,6 @@ article.error-login {
 
 /* ---------------------------- Registro ------------------------------------ */
 .img_perfil_reg {
-    background-image: url(../Img/Perfil/dAPJ.png);
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: var(--rem-5);
@@ -366,14 +365,21 @@ article.error-login {
 }
 
 /* -------------------------------- Home ------------------------------------ */
-.img_perfil_home {
-    background-image: url(../Img/Perfil/dAPJ.png);
+.img_perfil_aside {
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: var(--rem-5);
     height: 100px;
     width: 100px;
     margin: var(--rem-1) auto;
+}
+
+.img_perfil_aside img {
+    width: 100%;
+}
+
+#img_perfil {
+    margin-right: var(--rem-2);
 }
 
 

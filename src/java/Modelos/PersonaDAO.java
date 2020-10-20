@@ -256,4 +256,33 @@ public class PersonaDAO {
         return activado;
     }
 
+    // Método para actualizar datos personales
+    public static void actualizarPersona(String nombre, String apellido, String genero, String email, String password, String img_perfil) {
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "UPDATE usuarios SET nombre = ?, apellido = ?, genero = ?, email = ?, password = ?, img_perfil = ? WHERE email = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, nombre);
+            SQL_Preparada.setString(2, apellido);
+            SQL_Preparada.setString(3, genero);
+            SQL_Preparada.setString(4, email);
+            SQL_Preparada.setString(5, password);
+            SQL_Preparada.setString(6, img_perfil);
+            SQL_Preparada.setString(7, email);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
+
 }
