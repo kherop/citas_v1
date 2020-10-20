@@ -24,7 +24,7 @@
     </head>
     <body>
         <%
-            
+
             FileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
 
@@ -70,10 +70,6 @@
                 }
             }
 
-            for (String string : datosUsuario) {
-                System.out.println(string);
-            }
-
             // Preparado los datos del formulario
             String img_perfil = datosUsuario.get(0);
             String nombre = datosUsuario.get(1);
@@ -81,6 +77,9 @@
             String genero = datosUsuario.get(3);
             String email = datosUsuario.get(4);
             String password = datosUsuario.get(5);
+            String formulario = datosUsuario.get(6);
+
+            System.out.println(formulario);
 
             /* Cuando se registra un usuario hay que insertar en 3 tablas
              * Tabla de usuario -> Datos de usuario
@@ -89,15 +88,19 @@
              * despues si el administrador podra cambiar este rol en su
              * panel de control
              */
-            
             // Insert en la tabla usuarios con activacion a 0 por defecto y con idUsuario asignado por la BDD
             PersonaDAO.actualizarPersona(nombre, apellido, genero, email, password, img_perfil);
-            
 
-            // Guardo datos en la sesion para tener una referencia al usuario
-            response.sendRedirect("../Vistas/perfil.jsp");
-            Thread.sleep(1500);
-            
+            // Depende del formulario que venga lo envio a una pagina u otra, no hago con el valor del boton
+            if (formulario.equals("Guardar")) {
+                response.sendRedirect("../Vistas/administrar.jsp");
+
+            } else {
+                response.sendRedirect("../Vistas/perfil.jsp");
+
+            }
+            Thread.sleep(1700);
+
         %>
     </body>
 </html>

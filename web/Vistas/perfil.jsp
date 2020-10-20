@@ -94,8 +94,14 @@
                         <ul>
                             <li>
                                 <a href="perfil.jsp"  class="relative">
-                                    <i class="material-icons">people_outline</i>
+                                    <i class="material-icons">face</i>
                                     <span>Perfil</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="amigos.jsp"  class="relative">
+                                    <i class="material-icons">people_outline</i>
+                                    <span>Amigos</span>
                                 </a>
                             </li>
                             <li>
