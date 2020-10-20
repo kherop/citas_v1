@@ -107,7 +107,7 @@ nav .mensaje_info {
 /* Col - Puedo poner las que necesite dentro de la row, se divide el espacio */
 .col {
     padding: var(--rem-1);
-    margin: var(--rem-0) var(--rem-1) var(--rem-1);
+    margin: calc(var(--rem-1)/2);
     width: 100%;
 }
 
@@ -339,6 +339,28 @@ aside a:hover, aside button:hover {
     color: var(--color-dark);
 }
 
+/* Tarjeta mini */
+.tarjeta-mini {
+    width: auto;
+    margin-left: var(--rem-2);
+}
+
+.tarjeta-mini input[type="submit"] {
+    width: auto;
+}
+
+.tarjeta-mini input[type="file"] {
+    margin-bottom: 0;
+}
+
+.tarjeta-mini input, .tarjeta-mini select {
+    height: var(--rem-2);
+}
+
+.tarjeta-mini .img_perfil_aside {
+    height: 70px;
+}
+
 /* --------------------------- Página login --------------------------------- */
 
 .pareja-login {
@@ -382,6 +404,8 @@ article.error-login {
     margin-right: var(--rem-2);
 }
 
+/* ------------------------------ Administrar ------------------------------- */
+
 
 /* Diseño campos de formualarios para errores y correctos los reutilizaremos en
  * todos los furmularios
@@ -399,8 +423,13 @@ article.error-login {
 
 }
 
+input, select {
+    transition: all 0.2s linear;
+}
+
 input:focus, select:focus {
     outline: none;
+    background-color: var(--color-blue-dark);
 }
 
 .campo:focus:invalid {
@@ -577,6 +606,10 @@ input:focus, select:focus {
 
 .justify-content-space-between {
     justify-content: space-between;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
 }
 
 .align-items-center {
