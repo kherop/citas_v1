@@ -45,7 +45,7 @@
                 if (!campo.isFormField()) {
 
                     // Controlo si es usuario no introduce imagen propia, en ese caso pongo una
-                    if (campo.getName() == "") {
+                    if (campo.getName().isEmpty()) {
                         datosUsuario.add("dAPJ.png");
                     } else {
                         // Si es un fichero, guardamos la imagen en la ruta del servidor

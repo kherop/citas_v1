@@ -96,4 +96,33 @@ public class InteresesDAO {
         return intereses;
     }
 
+    // Método para actualizar intereses
+    public static void actualizarIntereses(String busca, String tipoRelacion, String hijos, int artisticos, int deportivos, int politicos, String email) {
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "UPDATE preferencias SET busca = ?, tipoRelacion = ?, hijos = ?, artisticos = ?, deportivos = ?, politicos = ? WHERE idUsuario = (SELECT idUsuario FROM usuarios WHERE email = ?);";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, busca);
+            SQL_Preparada.setString(2, tipoRelacion);
+            SQL_Preparada.setString(3, hijos);
+            SQL_Preparada.setInt(4, artisticos);
+            SQL_Preparada.setInt(5, deportivos);
+            SQL_Preparada.setInt(6, politicos);
+            SQL_Preparada.setString(7, email);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
+
 }

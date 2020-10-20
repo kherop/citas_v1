@@ -2,17 +2,11 @@
 function previewImg(event) {
     let url = new FileReader();
     url.onload = function () {
-        let imagen = document.getElementById('img_perfil');
-        imagen.style.backgroundImage = `url("${url.result}")`;
+        let imagen = document.getElementById('imgPerfil');
+        imagen.src = url.result;
     };
     url.readAsDataURL(event.target.files[0]);
 }
-
-// Mostrar de fondo la imagen que viene de la BDD
-function imgDefault(id, url){
-    let imagen = document.getElementById(id);
-    imagen.style.backgroundImage = `url("../Img/Perfil/${url}")`;
-};
 
 // Funcion para collapsar y expandir el menu lateral
 function ctrlMenuLateral() {
@@ -21,4 +15,11 @@ function ctrlMenuLateral() {
     menu.classList.toggle('menu-collapse');
     menu.classList.toggle('menu-expand');
 }
+
+var file = document.getElementById('file');
+var preview = document.getElementById('preview');
+
+file.addEventListener('change', function() {  
+  preview.src = URL.createObjectURL(this.files[0]);
+}, false);
 

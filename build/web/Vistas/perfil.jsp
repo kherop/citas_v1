@@ -40,7 +40,10 @@
                 // Recupero los intereses del usuario
                 Intereses intereses = InteresesDAO.obtenerIntereses(email);
 
-                String imgPergil = usuario.getImgPerfil();
+                // Recupero la imagen de usuario y la guardo en una variable de sesion
+                // por si no la cambia no le ponga la default
+                String imgPerfil = usuario.getImgPerfil();
+                session.setAttribute("imgUsuario", imgPerfil);
 
             %>
 
@@ -79,7 +82,9 @@
                         </button>
                         <hr class="hr-white mb-0">
                         <!-- Imagen de usuario -->
-                        <div class="img_perfil_home" id="img_perfil_home"></div>
+                        <div class="img_perfil_aside">
+                            <img src="../Img/Perfil/<%=usuario.getImgPerfil()%>">
+                        </div>
                         <hr class="hr-white mb-0">
                         <!-- Nombre usuario -->
                         <p class="p-1"><%=usuario.getNombre()%> <%=usuario.getApellido()%></p>
@@ -118,11 +123,13 @@
                     <div class="col m-0 d-flex justify-content-center align-items-center flex-direction-column relative">
 
                         <article class="w-60 tarjeta">
-                            <form name="modificar_datos_personales" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                            <form name="modificar_datos_personales" enctype="multipart/form-data" action="../Controladores/controlador_modificar_datos.jsp" enctype="multipart/form-data" method="POST" novalidate>
                                 <!-- Datos personales -->
                                 <!-- Imagen de perfil -->
                                 <div class="relative d-flex align-items-center">
-                                    <div class="img_perfil_reg" id="img_perfil"></div>
+                                    <div class="img_perfil_aside m-1">
+                                        <img src="../Img/Perfil/<%=usuario.getImgPerfil()%>" id="imgPerfil">
+                                    </div>
                                     <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
                                     <input id="file" type="file" name="img_perfil" onchange="previewImg(event);"/>
                                 </div>
@@ -186,7 +193,7 @@
                             </form>
                         </article>
                         <article class="w-60 tarjeta">
-                            <form name="preferencias" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                            <form name="preferencias" action="../Controladores/controlador_modificar_intereses.jsp" method="POST" novalidate>
                                 <!-- Interes -->
                                 <h2>Intereses</h2>
 
@@ -246,9 +253,9 @@
                                 <!-- Hijos -->
                                 <div class="relative">
                                     <select name="hijos" id="hijos" required aria-describedby="hijosError">
-                                        
-                                                                                <%
-                                        if (intereses.getHijos().equals("no")) {
+
+                                        <%
+                                            if (intereses.getHijos().equals("no")) {
                                         %>
                                         <option value="no" selected>No quiero por el momento</option>
                                         <option value="noImp">No tengo, pero no me importaría</option>
