@@ -4,6 +4,9 @@
     Author     : luis
 --%>
 
+<%@page import="Auxiliar.Constantes"%>
+<%@page import="Modelos.Intereses"%>
+<%@page import="Modelos.InteresesDAO"%>
 <%@page import="Modelos.PersonaDAO"%>
 <%@page import="Modelos.Persona"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,6 +29,7 @@
             <!-- Material icons -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         </head>
+
         <body class="bg-fixed">
 
             <%
@@ -33,6 +37,11 @@
                 String email = (String) session.getAttribute("emailUsuario");
                 // Recupero los datos de usuario de la base de datos
                 Persona usuario = PersonaDAO.obtenerPersonaSegura(email);
+                // Recupero los intereses del usuario
+                Intereses intereses = InteresesDAO.obtenerIntereses(email);
+
+                String imgPergil = usuario.getImgPerfil();
+
             %>
 
             <!-- Barra de navegación superior -->
@@ -115,29 +124,42 @@
                                 <div class="relative d-flex align-items-center">
                                     <div class="img_perfil_reg" id="img_perfil"></div>
                                     <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
-                                    <input id="file" type="file" name="img_perfil"  onload="img_default()" onchange="preview_img(event);"/>
+                                    <input id="file" type="file" name="img_perfil" onchange="previewImg(event);"/>
                                 </div>
 
                                 <!-- Nombre -->
                                 <div class="relative">
                                     <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre" required aria-describedby="nombreError"
-                                           class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+">
+                                           class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+" value="<%=usuario.getNombre()%>">
                                     <small id="nombreError" aria-live="polite"></small>
                                 </div>
 
                                 <!-- Apellidos -->
                                 <div class="relative">
                                     <input type="text" name="apellido" id="apellido" placeholder="Introduce tu apellido" required aria-describedby="apellidoError"
-                                           class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+">
+                                           class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+" value="<%=usuario.getApellido()%>">
                                     <small id="apellidoError" aria-live="polite"></small>
                                 </div>
 
                                 <!-- Genero -->
                                 <div class="relative">
                                     <select name="genero" id="genero" required aria-describedby="generoError">
-                                        <option value="" disabled selected>Selecciona tu genero</option>
-                                        <option value="hombre">Hombre</option>
+                                        <%
+                                            if (usuario.getGenero().equals("hombre")) {
+                                        %>
+                                        <option value="hombre" selected>Hombre</option>
                                         <option value="mujer">Mujer</option>
+
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="hombre">Hombre</option>
+                                        <option value="mujer" selected>Mujer</option>
+
+                                        <%
+                                            }
+
+                                        %>
                                     </select>
                                     <small id="generoError" aria-live="polite"></small>
                                 </div>
@@ -145,13 +167,14 @@
                                 <!-- Email -->
                                 <div class="relative">
                                     <input type="email" name="email" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
-                                           class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*">
+                                           class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+                                           value="<%=usuario.getEmail()%>">
                                     <small id="emailError" aria-live="polite"></small>
                                 </div>
 
                                 <!-- Password -->
                                 <div class="relative">
-                                    <input type="password" name="password" id="password" placeholder="Introduce tu contraseña" required aria-describedby="passwordError"
+                                    <input type="password" name="password" id="password" placeholder="Introduce una nueva contraseña" required aria-describedby="passwordError"
                                            class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
                                     <small id="passwordError" aria-live="polite"></small>
                                 </div>
@@ -165,14 +188,27 @@
                         <article class="w-60 tarjeta">
                             <form name="preferencias" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
                                 <!-- Interes -->
-                                <h2 class="text-white">Intereses</h2>
+                                <h2>Intereses</h2>
 
                                 <!-- Tipo de relación -->
                                 <div class="relative">
                                     <select name="tipoRelacion" id="tipoRelacion" required aria-describedby="tipoRelacion">
-                                        <option value="" disabled selected>Que relación buscas</option>
-                                        <option value="seria">Seria</option>
+                                        <%
+                                            if (intereses.getTipoRelacion().equals("seria")) {
+                                        %>
+                                        <option value="seria" selected>Seria</option>
                                         <option value="amistad">Amistad</option>
+
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="seria">Seria</option>
+                                        <option value="amistad" selected>Amistad</option>
+
+                                        <%
+                                            }
+                                        %>
+
                                     </select>
                                     <small id="tipoRelacionError" aria-live="polite"></small>
                                 </div>
@@ -180,10 +216,29 @@
                                 <!-- Interesado en -->
                                 <div class="relative">
                                     <select name="busca" id="busca" required aria-describedby="buscaError">
-                                        <option value="" disabled selected>Te interesan</option>
-                                        <option value="chicos">Chicos</option>
+
+                                        <%
+                                            if (intereses.getBusca().equals("chicos")) {
+                                        %>
+                                        <option value="chicos" selected>Chicos</option>
                                         <option value="chicas">Chicas</option>
                                         <option value="daIgual">Me da igual</option>
+                                        <%
+                                        } else if (intereses.getBusca().equals("chicas")) {
+                                        %>
+                                        <option value="chicos">Chicos</option>
+                                        <option value="chicas" requiered>Chicas</option>
+                                        <option value="daIgual">Me da igual</option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="chicos">Chicos</option>
+                                        <option value="chicas">Chicas</option>
+                                        <option value="daIgual" selected>Me da igual</option>
+                                        <%
+                                            }
+                                        %>
+
                                     </select>
                                     <small id="buscaError" aria-live="polite"></small>
                                 </div>
@@ -191,26 +246,44 @@
                                 <!-- Hijos -->
                                 <div class="relative">
                                     <select name="hijos" id="hijos" required aria-describedby="hijosError">
-                                        <option value="" disabled selected>Hijos</option>
-                                        <option value="no">No quiero por el momento</option>
+                                        
+                                                                                <%
+                                        if (intereses.getHijos().equals("no")) {
+                                        %>
+                                        <option value="no" selected>No quiero por el momento</option>
                                         <option value="noImp">No tengo, pero no me importaría</option>
                                         <option value="si">Si, tengo tengos</option>
+                                        <%
+                                        } else if (intereses.getBusca().equals("si")) {
+                                        %>
+                                        <option value="no">No quiero por el momento</option>
+                                        <option value="noImp">No tengo, pero no me importaría</option>
+                                        <option value="si" selected>Si, tengo tengos</option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="no">No quiero por el momento</option>
+                                        <option value="noImp" selected>No tengo, pero no me importaría</option>
+                                        <option value="si">Si, tengo tengos</option>
+                                        <%
+                                            }
+                                        %>
                                     </select>      
                                     <small id="hijosError" aria-live="polite"></small>
 
                                 </div>
 
                                 <!-- Artísticos -->
-                                <label for="artisticos" class="text-white">Artístico: (0 - 10) Por defecto 5</label>
-                                <input type="range" id="artisticos" name="artisticos" min="0" max="10">
+                                <label for="artisticos">Artístico: (0 - 10) Por defecto 5</label>
+                                <input type="range" id="artisticos" name="artisticos" min="0" max="10" value="<%=intereses.getArtisticos()%>">
 
                                 <!-- Deportivos -->
-                                <label for="deportivos" class="text-white">Deportivos: (0 - 10)Por defecto 5</label>
-                                <input type="range" id="deportivos" name="deportivos" min="0" max="10">
+                                <label for="deportivo">Deportivos: (0 - 10)Por defecto 5</label>
+                                <input type="range" id="deportivos" name="deportivos" min="0" max="10" value="<%=intereses.getDeportivos()%>">
 
                                 <!-- Políticos -->
-                                <label for="politicos" class="text-white">Políticos: (0 - 10)Por defecto 5</label>
-                                <input type="range" id="politicos" name="politicos" min="0" max="10">
+                                <label for="politicos">Políticos: (0 - 10)Por defecto 5</label>
+                                <input type="range" id="politicos" name="politicos" min="0" max="10" value="<%=intereses.getPoliticos()%>">
 
                                 <input type="submit" class="btn" name="modificar_preferencias" value="Guardar datos"/>
 
