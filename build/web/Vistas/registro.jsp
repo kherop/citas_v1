@@ -39,7 +39,7 @@
                         <div class="relative d-flex align-items-center">
                             <div class="img_perfil_reg" id="img_perfil"></div>
                             <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
-                            <input id="file" type="file" name="img_perfil"  onload="img_default()" onchange="preview_img(event);"/>
+                            <input id="file" type="file" name="img_perfil" onchange="previewImg(event);"/>
                         </div>
 
                         <!-- Nombre -->
