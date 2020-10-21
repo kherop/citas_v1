@@ -135,7 +135,7 @@
                                 <form name="modificar_datos_personales" enctype="multipart/form-data" action="../Controladores/controlador_modificar_datos.jsp" enctype="multipart/form-data" method="POST" novalidate>
                                     <!-- Datos personales -->
                                     <!-- Imagen de perfil -->
-                                    <div class="relative d-flex align-items-center">
+                                    <div class="relative d-flex align-items-center img_perfil_container">
                                         <div class="img_perfil_aside m-1">
                                             <img src="../Img/Perfil/<%=uaux.getImgPerfil()%>" id="imgPerfil">
                                         </div>

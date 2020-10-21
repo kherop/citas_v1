@@ -89,7 +89,7 @@ nav .mensaje_info {
     top: -14px;
 }
 
-/* Contenedor */
+/* Contenedor, contenedor general dentro iran las filas*/
 .container {
     display: flex;
     flex-direction: column;
@@ -98,7 +98,14 @@ nav .mensaje_info {
     margin: var(--rem-2);
 }
 
-/* Filas este css cambio de flex a block para hacer responsive el diseño */
+/* Filas esta clase cambio de flex a block para hacer responsive el diseño
+ * el diseño es par a movil, por eso parto con block para que todos los elementos
+ * ocupen el 100% y esten colocados uno debajo de otro. En medias superiores a
+ * 800 las filas tendran un display flex, con wrap, ya que l diseño esta pensado
+ * en tarjetas, y ellas mismas se van adecuando al diseño, ademas como este diseño
+ * puede tener muchos usuarios, ya no me preocupo en colocarlos, sino que según
+ * necesite el diseño el la va pintando y adecuando
+ */
 .row {
     display: block;
     justify-content: center;
@@ -129,6 +136,47 @@ aside.col {
     z-index: 10;
 }
 
+aside ul {
+    padding-left: var(--rem-0);
+    list-style: none;
+}
+
+aside p {
+    background-color: var(--color-blue);
+    font-weight: bolder;
+}
+
+aside ul a {
+    display: flex;
+    align-items: center;
+    color: var(--color-white);
+    text-decoration: none;
+    padding: var(--rem-1);
+    border-bottom: 1px solid var(--color-light);
+}
+
+aside ul li i {
+    padding-right: var(--rem-1);
+    color: var(--color-white);
+}
+
+.img_perfil_aside {
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: var(--rem-5);
+    height: 100px;
+    width: 100px;
+    margin: var(--rem-1) auto;
+}
+
+.img_perfil_aside img {
+    width: 100%;
+}
+
+#img_perfil {
+    margin-right: var(--rem-2);
+}
+
 /* Con las siguientes clase controlo el menu lateral con JS para collapsar */
 .menu-expand {
     width: 250px;
@@ -155,6 +203,7 @@ aside.col {
     transition: all 0.2s linear;
 }
 
+/* Pie de pagina, sencillo solo para contener la informacion corporativa */
 footer {
     text-align: center;
     color: var(--color-light);
@@ -183,6 +232,45 @@ input, select, file {
 
 ::placeholder {
     color: var(--color-white);
+}
+
+/* Diseño campos de formualarios para errores y correctos los reutilizaremos en
+ * todos los furmularios
+ */
+.error {
+    top: 40px;
+    left: 10px;
+    color: white;
+    background-color: var(--color-red-dark);
+}
+
+.error::after {
+    left: 25%;
+    border-color: transparent transparent var(--color-red-dark) transparent;
+
+}
+
+input, select {
+    transition: all 0.2s linear;
+}
+
+input:focus, select:focus {
+    outline: none;
+    background-color: var(--color-blue-dark);
+}
+
+.campo:focus:invalid {
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    border: 1px solid var(--color-red-dark);
+}
+
+.campo:focus:valid {
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    border: 1px solid var(--color-green);
 }
 
 input[type=file]{
@@ -259,6 +347,7 @@ input[type=file]{
     height: 50px;
 }
 
+/* Tooltip para mensajes */
 .tooltip {
     position: absolute;
     z-index: 10;
@@ -272,7 +361,6 @@ input[type=file]{
     transition: all 0.2s linear;
 }
 
-/* Tooltip para mensajes */
 .tooltip::after {
     content: " ";
     position: absolute;
@@ -282,31 +370,6 @@ input[type=file]{
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent black transparent;
-}
-
-/* Menu lateral */
-aside ul {
-    padding-left: var(--rem-0);
-    list-style: none;
-}
-
-aside p {
-    background-color: var(--color-blue);
-    font-weight: bolder;
-}
-
-aside ul a {
-    display: flex;
-    align-items: center;
-    color: var(--color-white);
-    text-decoration: none;
-    padding: var(--rem-1);
-    border-bottom: 1px solid var(--color-light);
-}
-
-aside ul li i {
-    padding-right: var(--rem-1);
-    color: var(--color-white);
 }
 
 .btn-aside {
@@ -339,7 +402,11 @@ aside a:hover, aside button:hover {
     color: var(--color-dark);
 }
 
-/* Tarjeta mini */
+/* Tarjeta mini, con la propiedad auto de width modifico su tamaño, para que 
+ * ocupen solo que su contenido necesite, por lo tanto ahora en pantallas de
+ * escritorio pueden entrar 4 y se ira reduciendo el numero de tarjetas por fila
+ * según se reduzca la pantalla
+ */
 .tarjeta-mini {
     width: auto;
     margin-left: var(--rem-2);
@@ -384,66 +451,6 @@ article.error-login {
     height: 150px;
     width: 150px;
     margin-right: var(--rem-1);
-}
-
-/* -------------------------------- Home ------------------------------------ */
-.img_perfil_aside {
-    background-size: contain;
-    background-repeat: no-repeat;
-    border-radius: var(--rem-5);
-    height: 100px;
-    width: 100px;
-    margin: var(--rem-1) auto;
-}
-
-.img_perfil_aside img {
-    width: 100%;
-}
-
-#img_perfil {
-    margin-right: var(--rem-2);
-}
-
-/* ------------------------------ Administrar ------------------------------- */
-
-
-/* Diseño campos de formualarios para errores y correctos los reutilizaremos en
- * todos los furmularios
- */
-.error {
-    top: 40px;
-    left: 10px;
-    color: white;
-    background-color: var(--color-red-dark);
-}
-
-.error::after {
-    left: 25%;
-    border-color: transparent transparent var(--color-red-dark) transparent;
-
-}
-
-input, select {
-    transition: all 0.2s linear;
-}
-
-input:focus, select:focus {
-    outline: none;
-    background-color: var(--color-blue-dark);
-}
-
-.campo:focus:invalid {
-    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    -moz-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    border: 1px solid var(--color-red-dark);
-}
-
-.campo:focus:valid {
-    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    -moz-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    border: 1px solid var(--color-green);
 }
 
 /* ------------------------------- Utilidades ------------------------------- */
@@ -643,7 +650,7 @@ input:focus, select:focus {
         display: flex;
     }
 
-    /* Login y similares */
+    /* Login y similares tarjetas */
     .login {
         width: 50%;
     }
@@ -654,4 +661,20 @@ input:focus, select:focus {
         left: 40px;
         width: 20%;
     }
+}
+
+@media only screen and (max-width: 520px) 
+{
+    /* En resoluciones inferiores a 520 pongo la imagen de perfil arriba 
+     * en la tarjeta, para evitar que se haga pequeña y se pierda
+     */
+    .img_perfil_container {
+        flex-direction: column;
+    }
+
+    /* Aunque ponga aside, reutizo esta clase para la imagen de las tarjetas */
+    .img_perfil_aside {
+        margin-bottom: 3rem;
+    }
+    
 }
