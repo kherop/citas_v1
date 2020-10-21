@@ -13,7 +13,7 @@
         <!-- Carga archivos CSS -->
         <link type="text/css" rel="stylesheet" href="../Css/app.css"/>
     </head>
-    <body onload="validacion()">
+    <body onload="validacion(); captcha()">
         <!-- Barra de navegación superior -->
         <nav>
             <a href="../index.jsp">
@@ -131,8 +131,17 @@
                         <!-- Políticos -->
                         <label for="politicos" class="text-white">Políticos: (0 - 10)Por defecto 5</label>
                         <input type="range" id="politicos" name="politicos" min="0" max="10">
+                        
+                        <!-- Captcha -->
+                        <div class="relative captcha">
+                            <canvas id="captcha"></canvas>
+                            <br>
+                            <input type="button" class="btn btn-dark w-auto" id="refresh" value="Refrescar" onclick="captcha();"/>
+                            <input type="text" class="input w-auto" id="txtInput" placeholder="Introduce el texto para hablitar el envio">
+                            <input id="button1" class="btn btn-dark w-auto" type="button" value="Validar" onclick="validCaptcha('txtInput');"/>
+                        </div>
+                        <input type="submit" class="btn" name="registro" value="Registrar" id="btnEnvio" disabled="true"/>
 
-                        <input type="submit" class="btn" name="registro" value="Registrar"/>
 
                     </form>
                     <hr class="hr-white">
@@ -154,6 +163,7 @@
         <!-- Carga archivos JS -->
         <script src="../Js/app.js"></script>
         <script src="../Js/validacionRegistro.js"></script>
+        <script src="../Js/captchaNumerico.js"></script>
     </body>
 </html>
 

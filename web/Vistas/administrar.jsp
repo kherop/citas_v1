@@ -73,6 +73,7 @@
             <!-- Menú lateral -->
             <div class="container w-100 m-0">
                 <section class="row flex-grow-1 home-flex">
+                    <!-- aside -->
                     <aside class="col m-0 menu-collapse" id="menu-lateral">
                         <!-- Boton menu -->
                         <button class="btn-aside" onclick="ctrlMenuLateral()">
@@ -126,23 +127,29 @@
                     <!-- Contenido de la pagina -->
 
                     <div class="container">
+                        <div class="row text-align-center">
+                            <div class="col">
+                                <h1>Administar</h1>
+                                <form name="modificar_datos_personales" action="nuevo_admin.jsp" method="POST" novalidate>
+                                    <input type="submit" class="btn bg-green w-50" name="nuevo_admin" value="Nuevo usuario"/>
+                                </form>
+                            </div>
+                        </div>
 
                         <div class="row flex-wrap">
                             <%
                                 for (Persona uaux : usuarios) {
                             %>
-                            <article class="tarjeta tarjeta-mini">
-                                <form name="modificar_datos_personales" enctype="multipart/form-data" action="../Controladores/controlador_modificar_datos.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                            <article class=" col tarjeta tarjeta-mini">
+                                <form name="modificar_datos_personales" action="../Controladores/controlador_admin.jsp" method="POST" novalidate>
                                     <!-- Datos personales -->
                                     <!-- Imagen de perfil -->
                                     <div class="relative d-flex align-items-center img_perfil_container">
-                                        <div class="img_perfil_aside m-1">
+                                        <div class="img_perfil_admin">
                                             <img src="../Img/Perfil/<%=uaux.getImgPerfil()%>" id="imgPerfil">
                                         </div>
-                                        <input id="txt" type = "text" value = "Selecciona imagen de perfil" onclick ="javascript:document.getElementById('file').click();">
-                                        <input id="file" type="file" name="img_perfil" onchange="previewImg(event);"/>
                                     </div>
-                                        
+                                    <hr class="hr-red-dark">
                                     <!-- Nombre -->
                                     <div class="relative">
                                         <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre" required aria-describedby="nombreError"
@@ -193,10 +200,24 @@
                                                class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
                                         <small id="passwordError" aria-live="polite"></small>
                                     </div>
+                                    <hr class="hr-red-dark">
 
                                     <input type="submit" class="btn" name="modificar_admin" value="Guardar"/>
-                                    <input type="submit" class="btn" name="eliminar_admin" value="Borrar"/>
-                                    <input type="submit" class="btn" name="eliminar_admin" value="Activar"/>
+                                    <input type="submit" class="btn bg-red" name="eliminar_admin" value="Borrar"/>
+                                    <%
+
+                                        if (PersonaDAO.usuarioActivado(uaux.getEmail())) {
+                                    %>
+                                    <input type="submit" class="btn bg-green" name="desactivar_admin" value="Desactivar"/>
+
+                                    <%
+                                    } else {
+
+                                    %>
+                                    <input type="submit" class="btn bg-green" name="activar_admin" value="Activar"/>
+                                    <%    }
+
+                                    %>
 
                                 </form>
                             </article>

@@ -98,10 +98,10 @@ nav .mensaje_info {
     margin: var(--rem-2);
 }
 
-/* Filas esta clase cambio de flex a block para hacer responsive el diseño
- * el diseño es par a movil, por eso parto con block para que todos los elementos
+/* Filas esta clase cambio de block a flex para hacer responsive el diseño
+ * el diseño es para movil, por eso parto con block para que todos los elementos
  * ocupen el 100% y esten colocados uno debajo de otro. En medias superiores a
- * 800 las filas tendran un display flex, con wrap, ya que l diseño esta pensado
+ * 800 las filas tendran un display flex, con wrap, ya que el diseño esta pensado
  * en tarjetas, y ellas mismas se van adecuando al diseño, ademas como este diseño
  * puede tener muchos usuarios, ya no me preocupo en colocarlos, sino que según
  * necesite el diseño el la va pintando y adecuando
@@ -232,45 +232,6 @@ input, select, file {
 
 ::placeholder {
     color: var(--color-white);
-}
-
-/* Diseño campos de formualarios para errores y correctos los reutilizaremos en
- * todos los furmularios
- */
-.error {
-    top: 40px;
-    left: 10px;
-    color: white;
-    background-color: var(--color-red-dark);
-}
-
-.error::after {
-    left: 25%;
-    border-color: transparent transparent var(--color-red-dark) transparent;
-
-}
-
-input, select {
-    transition: all 0.2s linear;
-}
-
-input:focus, select:focus {
-    outline: none;
-    background-color: var(--color-blue-dark);
-}
-
-.campo:focus:invalid {
-    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    -moz-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
-    border: 1px solid var(--color-red-dark);
-}
-
-.campo:focus:valid {
-    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    -moz-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
-    border: 1px solid var(--color-green);
 }
 
 input[type=file]{
@@ -412,10 +373,6 @@ aside a:hover, aside button:hover {
     margin-left: var(--rem-2);
 }
 
-.tarjeta-mini input[type="submit"] {
-    width: auto;
-}
-
 .tarjeta-mini input[type="file"] {
     margin-bottom: 0;
 }
@@ -426,6 +383,45 @@ aside a:hover, aside button:hover {
 
 .tarjeta-mini .img_perfil_aside {
     height: 70px;
+}
+
+/* Diseño campos de formualarios para errores y correctos los reutilizaremos en
+ * todos los furmularios
+ */
+.error {
+    top: 40px;
+    left: 10px;
+    color: white;
+    background-color: var(--color-red-dark);
+}
+
+.error::after {
+    left: 25%;
+    border-color: transparent transparent var(--color-red-dark) transparent;
+
+}
+
+input, select {
+    transition: all 0.2s linear;
+}
+
+input:focus, select:focus {
+    outline: none;
+    background-color: var(--color-blue-dark);
+}
+
+.campo:focus:invalid {
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    box-shadow: inset 0px 0px 10px 0px rgba(238,119,74,1);
+    border: 1px solid var(--color-red-dark);
+}
+
+.campo:focus:valid {
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    box-shadow: inset 0px 0px 10px 0px rgba(72,199,116,1);
+    border: 1px solid var(--color-green);
 }
 
 /* --------------------------- Página login --------------------------------- */
@@ -451,6 +447,19 @@ article.error-login {
     height: 150px;
     width: 150px;
     margin-right: var(--rem-1);
+}
+
+/* --------------------------- Administrar ---------------------------------- */
+.img_perfil_admin {
+    margin: var(--rem-1) auto;
+}
+
+.captcha {
+    text-align: center;
+}
+
+.captcha input {
+    display: inline;
 }
 
 /* ------------------------------- Utilidades ------------------------------- */
@@ -542,6 +551,9 @@ article.error-login {
 }
 
 /* Width en % */
+.w-auto {
+    width: auto;
+}
 .w-100 {
     width: 100%;
 }
@@ -554,12 +566,20 @@ article.error-login {
     width: 50%;
 }
 
+.w-30 {
+    width: 30%;
+}
+
 .w-25 {
     width: 25%;
 }
 
 .w-20 {
     width: 20%;
+}
+
+.w-10 {
+    width: 10%;
 }
 
 /* Background colores */
@@ -575,6 +595,11 @@ article.error-login {
     background-color: var(--color-light);
 }
 
+.bg-green {
+    background-color: var(--color-green);
+}
+
+/* Posicion del fondo */
 .bg-fixed {
     background-attachment: fixed;
 }
@@ -586,6 +611,11 @@ article.error-login {
 
 .text-red-dark {
     color: var(--color-red-dark);
+}
+
+/* Alineacion texto */
+.text-align-center {
+    text-align: center;
 }
 
 /* Display */
@@ -661,20 +691,4 @@ article.error-login {
         left: 40px;
         width: 20%;
     }
-}
-
-@media only screen and (max-width: 520px) 
-{
-    /* En resoluciones inferiores a 520 pongo la imagen de perfil arriba 
-     * en la tarjeta, para evitar que se haga pequeña y se pierda
-     */
-    .img_perfil_container {
-        flex-direction: column;
-    }
-
-    /* Aunque ponga aside, reutizo esta clase para la imagen de las tarjetas */
-    .img_perfil_aside {
-        margin-bottom: 3rem;
-    }
-    
 }

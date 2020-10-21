@@ -4,6 +4,10 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.InteresesDAO"%>
+<%@page import="Modelos.Intereses"%>
+<%@page import="Modelos.Intereses"%>
+<%@page import="java.util.LinkedList"%>
 <%@page import="Modelos.Persona"%>
 <%@page import="Modelos.PersonaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,9 +36,13 @@
                 // Recupero el email de la sesion
                 String email = (String) session.getAttribute("emailUsuario");
                 // Recupero los datos de usuario de la base de datos
+                LinkedList<Persona> usuarios = PersonaDAO.obtenerPersonas();
+                // Recupero los intereses del usuario
+                Intereses intereses = InteresesDAO.obtenerIntereses(email);
+
+                // Recupero el usuario de forma segura sin password
                 Persona usuario = PersonaDAO.obtenerPersonaSegura(email);
-                // Guardo el usuario seguro en la sesion para poder usarlo
-                session.setAttribute("usuario", usuario);
+
             %>
 
             <!-- Barra de navegación superior -->
@@ -62,9 +70,11 @@
                 </ul>
             </nav>
 
-            <!-- Menú lateral -->
+            <!-- Cuerpo de l pagina -->
             <div class="container w-100 m-0">
+
                 <section class="row flex-grow-1 home-flex">
+                    <!-- Menu laterial -->
                     <aside class="col m-0 menu-collapse" id="menu-lateral">
                         <!-- Boton menu -->
                         <button class="btn-aside" onclick="ctrlMenuLateral()">
@@ -114,26 +124,118 @@
                         </ul>
                     </aside>
 
-                    <!-- Perfil e intereses del usuario -->
-                    <div class="col m-0">
+                    <!-- Contenido de la pagina -->
 
-                        <article>
-                            cuerpo
-                        </article>
+                    <div class="container">
+                        <div class="row text-align-center">
+                            <div class="col">
+                                <h1>Amistades sugeridas...</h1>
+                                </form>
+                            </div>
+                        </div>
 
+                        <div class="row flex-wrap">
+                            <%
+                                for (Persona uaux : usuarios) {
+                            %>
+                            <article class=" col tarjeta tarjeta-mini">
+                                <form name="modificar_datos_personales" action="../Controladores/controlador_admin.jsp" method="POST" novalidate>
+                                    <!-- Datos personales -->
+                                    <!-- Imagen de perfil -->
+                                    <div class="relative d-flex align-items-center img_perfil_container">
+                                        <div class="img_perfil_admin">
+                                            <img src="../Img/Perfil/<%=uaux.getImgPerfil()%>" id="imgPerfil">
+                                        </div>
+                                    </div>
+                                    <hr class="hr-red-dark">
+                                    <!-- Nombre -->
+                                    <div class="relative">
+                                        <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre" required aria-describedby="nombreError"
+                                               class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+" value="<%=uaux.getNombre()%>">
+                                        <small id="nombreError" aria-live="polite"></small>
+                                    </div>
+
+                                    <!-- Apellidos -->
+                                    <div class="relative">
+                                        <input type="text" name="apellido" id="apellido" placeholder="Introduce tu apellido" required aria-describedby="apellidoError"
+                                               class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+" value="<%=uaux.getApellido()%>">
+                                        <small id="apellidoError" aria-live="polite"></small>
+                                    </div>
+
+                                    <!-- Genero -->
+                                    <div class="relative">
+                                        <select name="genero" id="genero" required aria-describedby="generoError">
+                                            <%
+                                                if (uaux.getGenero().equals("hombre")) {
+                                            %>
+                                            <option value="hombre" selected>Hombre</option>
+                                            <option value="mujer">Mujer</option>
+
+                                            <%
+                                            } else {
+                                            %>
+                                            <option value="hombre">Hombre</option>
+                                            <option value="mujer" selected>Mujer</option>
+
+                                            <%
+                                                }
+                                            %>
+                                        </select>
+                                        <small id="generoError" aria-live="polite"></small>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="relative">
+                                        <input type="email" name="email" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
+                                               class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+                                               value="<%=uaux.getEmail()%>">
+                                        <small id="emailError" aria-live="polite"></small>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="relative">
+                                        <input type="password" name="password" id="password" placeholder="Introduce una nueva contraseña" required aria-describedby="passwordError"
+                                               class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                        <small id="passwordError" aria-live="polite"></small>
+                                    </div>
+                                    <hr class="hr-red-dark">
+
+                                    <input type="submit" class="btn" name="modificar_admin" value="Guardar"/>
+                                    <input type="submit" class="btn bg-red" name="eliminar_admin" value="Borrar"/>
+                                    <%
+
+                                        if (PersonaDAO.usuarioActivado(uaux.getEmail())) {
+                                    %>
+                                    <input type="submit" class="btn bg-green" name="desactivar_admin" value="Desactivar"/>
+
+                                    <%
+                                    } else {
+
+                                    %>
+                                    <input type="submit" class="btn bg-green" name="activar_admin" value="Activar"/>
+                                    <%    }
+
+                                    %>
+
+                                </form>
+                            </article>
+                            <%                        }
+                            %>
+                        </div>
                     </div>
-                </section>
             </div>
+        </section>
+    </div>
 
-            <!-- Footer -->
-            <footer>
-                <div>© 2020 Copyright:
-                    <a href="https://luisquesadadesign.com" class="a a-red"> Luis Quesada Design</a>
-                </div>
-            </footer>
+    <!-- Footer -->
+    <footer>
+        <div>© 2020 Copyright:
+            <a href="https://luisquesadadesign.com" class="a a-red"> Luis Quesada Design</a>
+        </div>
+    </footer>
 
-            <!-- Carga archivos JS -->
-            <script src="../Js/app.js"></script>
-            <script src="../Js/validacionLogin.js"></script>
-        </body>
-    </html>
+    <!-- Carga archivos JS -->
+    <script src="../Js/app.js"></script>
+    <script src="../Js/validacionLogin.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registro
-    Created on : 13-oct-2020, 11:49:41
+    Document   : nuevo_admin
+    Created on : 21-oct-2020, 12:53:06
     Author     : luis
 --%>
 
@@ -9,7 +9,7 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Inicio</title>
+        <title>Nuevo usuario desde admin</title>
         <!-- Carga archivos CSS -->
         <link type="text/css" rel="stylesheet" href="../Css/app.css"/>
     </head>
@@ -28,12 +28,11 @@
                 <article class="col login bg-red border-radius">
                     <!-- Logo formulario -->
                     <div>
-                        <h1 class="display-3 text-white">Enhorabuena...</h1>
-                        <p class="text-white">...estas a un paso de vivir grandes aventuras</p>
+                        <h1 class="display-3 text-white">Nuevo usuario</h1>
                     </div>
                     <hr class="hr-white">
 
-                    <form name="registro" action="../Controladores/controlador_registro.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                    <form name="registro" action="../Controladores/controlador_nuevo_admin.jsp" enctype="multipart/form-data" method="POST" novalidate>
                         <!-- Datos personales -->
                         <!-- Imagen de perfil -->
                         <div class="relative d-flex align-items-center">
@@ -166,4 +165,3 @@
         <script src="../Js/captchaNumerico.js"></script>
     </body>
 </html>
-
