@@ -256,14 +256,14 @@ public class PersonaDAO {
         return activado;
     }
 
-    // Método para actualizar datos personales
-    public static void actualizarPersona(String nombre, String apellido, String genero, String email, String password, String img_perfil) {
+    // Método para actualizar datos personales sin imagen de perfil
+    public static void actualizarPersona(String nombre, String apellido, String genero, String email, String password) {
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
 
             // Creo la consulta SQL, la ejecuto y la guardo
-            String sentencia = "UPDATE usuarios SET nombre = ?, apellido = ?, genero = ?, email = ?, password = ?, img_perfil = ? WHERE email = ?;";
+            String sentencia = "UPDATE usuarios SET nombre = ?, apellido = ?, genero = ?, email = ?, password = ? WHERE email = ?;";
 
             // Preparo la sentencia SQL
             SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
@@ -272,8 +272,7 @@ public class PersonaDAO {
             SQL_Preparada.setString(3, genero);
             SQL_Preparada.setString(4, email);
             SQL_Preparada.setString(5, password);
-            SQL_Preparada.setString(6, img_perfil);
-            SQL_Preparada.setString(7, email);
+            SQL_Preparada.setString(6, email);
 
             // Ejecuto la sentencia
             SQL_Preparada.executeUpdate();
@@ -284,9 +283,36 @@ public class PersonaDAO {
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
     }
-    
+
+    // Método para actualizar datos personales sin imagen de perfil
+    public static void actualizarPersonaSinPass(String nombre, String apellido, String genero, String email) {
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "UPDATE usuarios SET nombre = ?, apellido = ?, genero = ?, email = ? WHERE email = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, nombre);
+            SQL_Preparada.setString(2, apellido);
+            SQL_Preparada.setString(3, genero);
+            SQL_Preparada.setString(4, email);
+            SQL_Preparada.setString(5, email);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
+
     // Método para eliminar persona
-        // Método para actualizar datos personales
+    // Método para actualizar datos personales
     public static void eliminarPersona(String email) {
         try {
             // Creo una conexion
@@ -308,6 +334,29 @@ public class PersonaDAO {
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
     }
-    
+
+    // Método para activar o desactivar un usuario 1-> activo 0-> inactivo
+    public static void activarDesactivar(int valor, String email) {
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "UPDATE usuarios SET activado = ? WHERE email = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, valor);
+            SQL_Preparada.setString(2, email);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
 
 }
