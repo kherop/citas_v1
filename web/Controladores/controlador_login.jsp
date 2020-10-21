@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.InteresesDAO"%>
 <%@page import="Modelos.ConexionEstatica"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="Modelos.ConexionEstatica"%>
@@ -39,6 +40,10 @@
                     if (PersonaDAO.usuarioActivado(email)) {
                         // Si esta activo guardo el email en la sesion y lo redirijo al homr
                         session.setAttribute("emailUsuario", email);
+                        
+                        // Preparo la compatibilidad del usuario con todos
+                        InteresesDAO.compatibilidad(email);
+                        
                         response.sendRedirect("../Vistas/home.jsp");
                     } else {
                         // Si no esta activo lo redirijo a la pagina

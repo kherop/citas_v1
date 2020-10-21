@@ -38,7 +38,7 @@
                 // Recupero los datos de usuario de la base de datos
                 LinkedList<Persona> usuarios = PersonaDAO.obtenerPersonas();
                 // Recupero los intereses del usuario
-                Intereses intereses = InteresesDAO.obtenerIntereses(email);
+                Intereses intereses;
 
                 // Recupero el usuario de forma segura sin password
                 Persona usuario = PersonaDAO.obtenerPersonaSegura(email);
@@ -92,6 +92,12 @@
                         <!-- Menu -->
                         <ul>
                             <li>
+                                <a href="home.jsp"  class="relative">
+                                    <i class="material-icons">house_siding</i>
+                                    <span>Perfil</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="perfil.jsp"  class="relative">
                                     <i class="material-icons">face</i>
                                     <span>Perfil</span>
@@ -139,85 +145,105 @@
                                 for (Persona uaux : usuarios) {
                             %>
                             <article class=" col tarjeta tarjeta-mini">
-                                <form name="modificar_datos_personales" action="../Controladores/controlador_admin.jsp" method="POST" novalidate>
-                                    <!-- Datos personales -->
-                                    <!-- Imagen de perfil -->
-                                    <div class="relative d-flex align-items-center img_perfil_container">
-                                        <div class="img_perfil_admin">
-                                            <img src="../Img/Perfil/<%=uaux.getImgPerfil()%>" id="imgPerfil">
-                                        </div>
+                                <!-- Datos personales -->
+                                <!-- Imagen de perfil -->
+                                <div class="relative d-flex align-items-center img_perfil_container">
+                                    <div class="img_perfil_admin">
+                                        <img src="../Img/Perfil/<%=uaux.getImgPerfil()%>" id="imgPerfil">
                                     </div>
-                                    <hr class="hr-red-dark">
-                                    <!-- Nombre -->
-                                    <div class="relative">
-                                        <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre" required aria-describedby="nombreError"
-                                               class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+" value="<%=uaux.getNombre()%>">
-                                        <small id="nombreError" aria-live="polite"></small>
+                                </div>
+                                <hr class="hr-red-dark">
+                                <!-- Nombre -->
+                                <h3 class="text-align-center mb-1"><%=uaux.getNombre()%> <%=uaux.getApellido()%></h3>
+                                <hr class="hr-red-dark">
+
+                                <!-- Iconos de interes --->
+                                <div class="row intereses">
+                                    <div class="col icono">
+                                        <p>Busca:</p>
+                                        <%
+                                            intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
+                                            System.out.println(intereses.getBusca());
+                                            if (intereses.getBusca().equals("chicos")) {
+                                        %>
+                                        <p>Chico</p>
+                                        <img src="../Img/png/chico.png"/>
+                                        <%
+                                        } else if (intereses.getBusca().equals("chicas")) {
+                                        %>
+                                        <p>Chica</p>
+                                        <img src="../Img/png/chica.png"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <p>Chico/Chica</p>
+                                        <img src="../Img/png/chico_chica.png"/>
+                                        <%
+                                            }
+                                        %>
                                     </div>
-
-                                    <!-- Apellidos -->
-                                    <div class="relative">
-                                        <input type="text" name="apellido" id="apellido" placeholder="Introduce tu apellido" required aria-describedby="apellidoError"
-                                               class="campo" minlength="3" maxlength="20" pattern="[A-Z]{1}[a-z]+" value="<%=uaux.getApellido()%>">
-                                        <small id="apellidoError" aria-live="polite"></small>
+                                    <div class="col icono">
+                                        <p>Busca:</p>
+                                        <%
+                                            if (intereses.getTipoRelacion().equals("amistad")) {
+                                        %>
+                                        <p>Amistad</p>
+                                        <img src="../Img/png/amistad.png"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <p>Seria</p>
+                                        <img src="../Img/png/serio.png"/>
+                                        <%
+                                            }
+                                        %>
                                     </div>
-
-                                    <!-- Genero -->
-                                    <div class="relative">
-                                        <select name="genero" id="genero" required aria-describedby="generoError">
-                                            <%
-                                                if (uaux.getGenero().equals("hombre")) {
-                                            %>
-                                            <option value="hombre" selected>Hombre</option>
-                                            <option value="mujer">Mujer</option>
-
-                                            <%
-                                            } else {
-                                            %>
-                                            <option value="hombre">Hombre</option>
-                                            <option value="mujer" selected>Mujer</option>
-
-                                            <%
-                                                }
-                                            %>
-                                        </select>
-                                        <small id="generoError" aria-live="polite"></small>
+                                    <div class="col icono">
+                                        <p>Interesa:</p>
+                                        <%
+                                            if (intereses.getHijos().equals("si")) {
+                                        %>
+                                        <p>Si</p>
+                                        <img src="../Img/png/hijos.png"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <p>No</p>
+                                        <img src="../Img/png/hijos.png"/>
+                                        <%
+                                            }
+                                        %>
                                     </div>
+                                </div>
+                                <hr class="hr-red-dark">
 
-                                    <!-- Email -->
-                                    <div class="relative">
-                                        <input type="email" name="email" id="email" placeholder="Introduce tu correo" required aria-describedby="emailError"
-                                               class="campo" minlength="5" maxlength="20" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
-                                               value="<%=uaux.getEmail()%>">
-                                        <small id="emailError" aria-live="polite"></small>
+                                <!-- Barras de interes -->
+                                <div class="row flex-direction-column intereses mb-1">
+                                    <div class="col barras">
+                                        <label for="file">Artísticos:</label>
+                                        <progress value="<%=intereses.getArtisticos()%>" max="10"></progress>
                                     </div>
-
-                                    <!-- Password -->
-                                    <div class="relative">
-                                        <input type="password" name="password" id="password" placeholder="Introduce una nueva contraseña" required aria-describedby="passwordError"
-                                               class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
-                                        <small id="passwordError" aria-live="polite"></small>
+                                    <div class="col barras">
+                                        <label for="file">Políticos:</label>
+                                        <progress value="<%=intereses.getPoliticos()%>" max="10"></progress>
                                     </div>
-                                    <hr class="hr-red-dark">
+                                    <div class="col barras">
+                                        <label for="file">Deportivos:</label>
+                                        <progress value="<%=intereses.getDeportivos()%>" max="10"></progress>
+                                    </div>
+                                </div>
+                                <hr class="hr-red-dark">
 
-                                    <input type="submit" class="btn" name="modificar_admin" value="Guardar"/>
-                                    <input type="submit" class="btn bg-red" name="eliminar_admin" value="Borrar"/>
-                                    <%
+                                <!-- Interaction -->
+                                <div class="row interaccion mb-1 justify-content-space-between">
+                                    <form name="mensaje_tarjeta" action="../Controladores/controlador_mensaje.jsp" method="POST">
+                                        <button type="submit" name="mensaje_tarjeta"><i class="material-icons">mail_outline</i></button>
+                                    </form>
+                                    <form name="me_gusta_tarjeta" action="../Controladores/controlador_me_gusta.jsp" method="POST">
+                                        <button type="submit" name="me_gusta_tarjeta" class="d-flex justify-content-center">Me gusta <i class="material-icons">favorite</i></button>
+                                    </form>
+                                </div>
 
-                                        if (PersonaDAO.usuarioActivado(uaux.getEmail())) {
-                                    %>
-                                    <input type="submit" class="btn bg-green" name="desactivar_admin" value="Desactivar"/>
-
-                                    <%
-                                    } else {
-
-                                    %>
-                                    <input type="submit" class="btn bg-green" name="activar_admin" value="Activar"/>
-                                    <%    }
-
-                                    %>
-
-                                </form>
                             </article>
                             <%                        }
                             %>

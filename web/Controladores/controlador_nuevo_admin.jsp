@@ -82,8 +82,8 @@
             String genero = datosUsuario.get(3);
             String email = datosUsuario.get(4);
             String password = datosUsuario.get(5);
-            String busca = datosUsuario.get(6);
-            String tipoRelacion = datosUsuario.get(7);
+            String busca = datosUsuario.get(7);
+            String tipoRelacion = datosUsuario.get(6);
             String hijos = datosUsuario.get(8);
             int artisticos = Integer.parseInt(datosUsuario.get(9));
             int deportivos = Integer.parseInt(datosUsuario.get(10));

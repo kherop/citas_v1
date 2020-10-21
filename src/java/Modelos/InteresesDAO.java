@@ -124,5 +124,10 @@ public class InteresesDAO {
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
     }
+    
+    // Método para ver la compatibilidad del usuario con los registrados
+    public static void compatibilidad(String email) {
+        
+    }
 
 }

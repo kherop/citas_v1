@@ -424,6 +424,43 @@ input:focus, select:focus {
     border: 1px solid var(--color-green);
 }
 
+/* Iconos de las tarjetas de amigos */
+.row .intereses {
+    text-align: center;
+}
+
+.intereses .icono {
+    padding: var(--rem-1);
+    margin: 0;
+}
+
+.intereses p {
+    padding-bottom: calc(var(--rem-1)/2);
+
+}
+
+/* Barras de las tarjetas de amigo */
+.row .barras {
+    margin: 0;
+    padding: 0;
+}
+
+.barras label {
+    display: block;
+    text-align: left;
+    padding-top: calc(var(--rem-1)/2);
+}
+
+.barras progress {
+    display: block;
+    width: 100%;
+}
+
+/* Botones de interaccion de las tarjetas */
+.interaccion button {
+    border: none;
+    cursor: pointer;
+}
 /* --------------------------- Página login --------------------------------- */
 
 .pareja-login {
@@ -497,6 +534,10 @@ article.error-login {
 
 .mb-0 {
     margin-bottom: var(--rem-0);
+}
+
+.mb-1 {
+    margin-bottom: var(--rem-1);
 }
 
 /* Padding */

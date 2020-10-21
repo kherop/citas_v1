@@ -40,8 +40,8 @@
                 // Recupero los intereses del usuario
                 Intereses intereses = InteresesDAO.obtenerIntereses(email);
 
-                // Recupero el usuario de la sesion para trabajar con el
-                Persona usuario = (Persona) session.getAttribute("usuario");
+                // Recupero el usuario de forma segura sin password
+                Persona usuario = PersonaDAO.obtenerPersonaSegura(email);
 
             %>
 
@@ -91,6 +91,12 @@
                         <hr class="hr-white mb-0">
                         <!-- Menu -->
                         <ul>
+                            <li>
+                                <a href="home.jsp"  class="relative">
+                                    <i class="material-icons">house_siding</i>
+                                    <span>Perfil</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="perfil.jsp"  class="relative">
                                     <i class="material-icons">face</i>

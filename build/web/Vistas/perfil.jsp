@@ -93,6 +93,12 @@
                         <!-- Menu -->
                         <ul>
                             <li>
+                                <a href="home.jsp"  class="relative">
+                                    <i class="material-icons">house_siding</i>
+                                    <span>Perfil</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="perfil.jsp"  class="relative">
                                     <i class="material-icons">face</i>
                                     <span>Perfil</span>
@@ -129,7 +135,7 @@
                     <div class="col m-0 d-flex justify-content-center align-items-center flex-direction-column relative">
 
                         <article class="w-60 tarjeta">
-                            <form name="modificar_datos_personales" enctype="multipart/form-data" action="../Controladores/controlador_modificar_datos.jsp" enctype="multipart/form-data" method="POST" novalidate>
+                            <form name="modificar_datos_personales" action="../Controladores/controlador_modificar_datos.jsp" enctype="multipart/form-data" method="POST" novalidate>
                                 <!-- Datos personales -->
                                 <!-- Imagen de perfil -->
                                 <div class="relative d-flex align-items-center">

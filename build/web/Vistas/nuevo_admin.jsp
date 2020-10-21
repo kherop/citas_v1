@@ -146,7 +146,7 @@
                     <hr class="hr-white">
 
                     <!-- Enlace para volver -->
-                    <a href="../index.jsp" class="a a-white">Volver</a>
+                    <a href="administrar.jsp" class="a a-white">Volver</a>
 
                 </article>
             </section>
