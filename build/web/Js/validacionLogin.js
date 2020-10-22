@@ -50,10 +50,12 @@ function validacion() {
         // Comprobamos que todos los campos son correcto para dejar enviar al formulario
         if (!email.validity.valid) {
             mostrarEmailError();
+            quitarError(emailError);
             event.preventDefault();
         }
         if (!password.validity.valid) {
             mostrarPasswordError();
+            quitarError(passwordError);
             event.preventDefault();
         }
     });

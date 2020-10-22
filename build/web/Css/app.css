@@ -668,6 +668,10 @@ article.error-login {
     display: inline-block;
 }
 
+.d-none {
+    display: none;
+}
+
 /* Utilidades Flex Box */
 
 .flex-grow-0 {

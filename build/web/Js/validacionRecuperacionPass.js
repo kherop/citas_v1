@@ -33,6 +33,7 @@ function validacion() {
         // Comprobamos que todos los campos son correcto para dejar enviar al formulario
         if (!email.validity.valid) {
             mostrarEmailError();
+            quitarError(emailError);
             event.preventDefault();
         }
     });
@@ -63,5 +64,4 @@ function quitarError(campo) {
         campo.className = 'error';
         campo.innerHTML = '';
     }, 1500);
-
 }

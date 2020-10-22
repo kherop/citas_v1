@@ -136,6 +136,36 @@ public class PersonaDAO {
         ConexionEstatica.cerrarBDD();
         return persona;
     }
+    
+    // Método para obtener una persona sin el pass p
+    public static int obtenerID(String email) {
+        int idUsuario = 0;
+        
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "SELECT idUsuario FROM usuarios WHERE email = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, email);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            if (Resultado_SQL.next()) {
+                idUsuario = Resultado_SQL.getInt("idUsuario");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo el valor
+        ConexionEstatica.cerrarBDD();
+        return idUsuario;
+    }
 
     // Método para obtener una persona sin el pass p
     public static Persona obtenerPersonaSeguraID(Integer idUsuario) {

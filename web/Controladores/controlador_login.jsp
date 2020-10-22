@@ -72,7 +72,7 @@
                             errorMessage = "Captcha no válido";
                         }
                         session.setAttribute("errorMessage", errorMessage);
-                        response.sendRedirect("login.jsp");
+                        response.sendRedirect("../index.jsp");
                     }
 
                 }

@@ -105,34 +105,42 @@ function validacion() {
         // Comprobamos que todos los campos son correcto para dejar enviar al formulario
         if (!nombre.validity.valid) {
             mostrarNombreError();
+            quitarError(nombreError);
             event.preventDefault();
         }
         if (!apellido.validity.valid) {
             mostrarApellidoError();
+            quitarError(apellidoError);
             event.preventDefault();
         }
         if (!genero.validity.valid) {
             mostrarGeneroError();
+            quitarError(generoError);
             event.preventDefault();
         }
         if (!email.validity.valid) {
             mostrarEmailError();
+            quitarError(emailError);
             event.preventDefault();
         }
         if (!password.validity.valid) {
             mostrarPasswordError();
+            quitarError(passwordError);
             event.preventDefault();
         }
         if (!tipoRelacion.validity.valid) {
             mostrarTipoRelacionError();
+            quitarError(tipoRelacionError);
             event.preventDefault();
         }
         if (!busca.validity.valid) {
             mostrarBuscaError();
+            quitarError(buscaError);
             event.preventDefault();
         }
         if (!hijos.validity.valid) {
             mostrarHijosError();
+            quitarError(hijosError);
             event.preventDefault();
         }
     });

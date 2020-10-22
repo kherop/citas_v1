@@ -31,11 +31,12 @@
             <!-- Material icons -->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         </head>
-        <body>
+        <body class="bg-fixed">
 
             <%
                 // Recupero el email de la sesion
                 String email = (String) session.getAttribute("emailUsuario");
+                System.out.println("prueba" + email);
                 // Recupero los datos de usuario de la base de datos
                 LinkedList<Persona> usuarios = PersonaDAO.obtenerPersonas();
                 // Recupero los intereses del usuario
@@ -86,15 +87,16 @@
                         <!-- Imagen de usuario -->
                         <div class="img_perfil_aside">
                             <img src="../Img/Perfil/<%=usuario.getImgPerfil()%>">
-                        </div>                    <hr class="hr-white mb-0">
+                        </div>                    
+                        <hr class="hr-white mb-0">
+                        
                         <!-- Nombre usuario -->
                         <p class="p-1"><%=usuario.getNombre()%> <%=usuario.getApellido()%></p>
-
                         <hr class="hr-white mb-0">
                         <!-- Menu -->
                         <ul>
                             <li>
-                                <a href="home.jsp"  class="relative">
+                                <a href="../Controladores/controlador_global.jsp?opc=1"  class="relative">
                                     <i class="material-icons">house_siding</i>
                                     <span>Perfil</span>
                                 </a>
@@ -248,10 +250,12 @@
                                 <!-- Interaction -->
                                 <div class="row interaccion mb-1 justify-content-space-between">
                                     <form name="mensaje_tarjeta" action="../Controladores/controlador_mensaje.jsp" method="POST">
+                                        <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
                                         <button type="submit" name="mensaje_tarjeta"><i class="material-icons">mail_outline</i></button>
                                     </form>
-                                    <form name="me_gusta_tarjeta" action="../Controladores/controlador_me_gusta.jsp" method="POST">
-                                        <button type="submit" name="me_gusta_tarjeta" class="d-flex justify-content-center">Me gusta <i class="material-icons">favorite</i></button>
+                                    <form name="me_gusta_tarjeta" action="../Controladores/controlador_amigos.jsp" method="POST">
+                                        <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
+                                        <button type="submit" name="me_gusta_tarjeta" class="d-flex align-items-center" value="me_gusta_tarjeta">Me gusta <i class="material-icons">favorite</i></button>
                                     </form>
                                 </div>
 
