@@ -164,7 +164,7 @@ public class InteresesDAO {
         return interesesBD;
     }
 
-        // Método para eliminar persona
+    // Método para eliminar persona
     public static void eliminarIntereses(String email) {
         try {
             // Creo una conexion
@@ -187,8 +187,7 @@ public class InteresesDAO {
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
     }
-    
-    
+
     // Método para comprobar la compatibilidad de un usuario con todos los registrados.
     /*
     Este algoritmo es muy sencillo, se basa en la diferencia, primero voy a comparar el tipo de relacion
@@ -255,19 +254,17 @@ public class InteresesDAO {
             resultado += Math.abs(interesUsuario.getPoliticos() - interesesAux.getPoliticos());
 
             // Si no es el mismo lo guardo en el HashMap
-            /*if (!(interesUsuario.getIdUsuario() == interesesAux.getIdUsuario())) {
-                puntuacion.put(resultado, interesesAux.getIdUsuario());
-
-            }*/
-            puntuacion.put(interesesAux.getIdUsuario(), resultado);
-
+            if (!(interesUsuario.getIdUsuario() == interesesAux.getIdUsuario())) {
+                puntuacion.put(interesesAux.getIdUsuario(), resultado);
+            }
         }
 
         ordenada.putAll(puntuacion);
-        
-        for (Map.Entry<Integer, Integer> entry : ordenada.entrySet())  
-            System.out.println("Key = " + entry.getKey() +  
-                         ", Value = " + entry.getValue());   
+
+        for (Map.Entry<Integer, Integer> entry : ordenada.entrySet()) {
+            System.out.println("Key = " + entry.getKey()
+                    + ", Value = " + entry.getValue());
+        }
 
         return puntuacion;
     }

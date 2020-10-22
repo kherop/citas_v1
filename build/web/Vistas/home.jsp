@@ -194,7 +194,7 @@
                                         %>
                                     </div>
                                     <div class="col icono">
-                                        <p>Busca:</p>
+                                        <p>Relación:</p>
                                         <%
                                             if (intereses.getTipoRelacion().equals("amistad")) {
                                         %>

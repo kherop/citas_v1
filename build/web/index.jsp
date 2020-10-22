@@ -12,6 +12,8 @@
         <title>Inicio</title>
         <!-- Carga archivos CSS -->
         <link type="text/css" rel="stylesheet" href="Css/app.css"/>
+        <!-- Carga reCAPTCHA Google -->
+        <script src="https://www.google.com/recaptcha/api.js"></script>
     </head>
     <body onload="validacion()">
         <!-- Barra de navegación superior -->
@@ -43,6 +45,15 @@
                                    class="campo" minlength="2" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
                             <small id="passwordError" aria-live="polite"></small>
                         </div>
+
+                        <div class="g-recaptcha relative" data-sitekey="6Ld7ONoZAAAAAEkt3-XOgO6ny32J9wU2Y0YfC2ZE"></div>
+                        <span>
+                            <%
+                                Object errorMessage = session.getAttribute("errorMessage");
+                                if (errorMessage != null)
+                                    out.print(errorMessage.toString());
+                            %>
+                        </span>
                         <div>
                             <input type="submit" class="btn" name="entrar_login" value="Entrar"/>
                         </div>
