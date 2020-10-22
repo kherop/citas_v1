@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@page import="java.util.Map"%>
 <%@page import="Modelos.InteresesDAO"%>
 <%@page import="Modelos.Intereses"%>
 <%@page import="Modelos.Intereses"%>
@@ -39,9 +40,10 @@
                 LinkedList<Persona> usuarios = PersonaDAO.obtenerPersonas();
                 // Recupero los intereses del usuario
                 Intereses intereses;
-
                 // Recupero el usuario de forma segura sin password
                 Persona usuario = PersonaDAO.obtenerPersonaSegura(email);
+                // Recupero la tabla de compatibilidad
+                Map<Integer, Integer> puntuacion = (Map<Integer, Integer>) session.getAttribute("puntuacion");
 
             %>
 
@@ -142,7 +144,17 @@
 
                         <div class="row flex-wrap">
                             <%
-                                for (Persona uaux : usuarios) {
+                                // Recorro las puntuaciones posibles
+                                // 0 mas compatible
+                                // 32 menso compatible
+                                for (int i = 0; i <= 32; i++) {
+                                    // Recorro el map para buscar coincidencia con el indice
+                                    for (Map.Entry<Integer, Integer> entry : puntuacion.entrySet()) {
+                                        if (entry.getValue() == i) {
+                                            // Si hay coincidencia en esa puntuacion recupero el id del usuario para mostarlo
+                                            Persona uaux = PersonaDAO.obtenerPersonaSeguraID(entry.getKey());
+                                            // Tambien recupero sus intereses
+                                            Intereses intaux = InteresesDAO.obtenerIntereses(uaux.getEmail());
                             %>
                             <article class=" col tarjeta tarjeta-mini">
                                 <!-- Datos personales -->
@@ -245,6 +257,8 @@
 
                             </article>
                             <%                        }
+                                    }
+                                }
                             %>
                         </div>
                     </div>

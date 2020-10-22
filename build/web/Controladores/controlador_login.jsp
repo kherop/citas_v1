@@ -44,8 +44,9 @@
                         // Si esta activo guardo el email en la sesion y lo redirijo al homr
                         session.setAttribute("emailUsuario", email);
                         
-                        // Preparo la compatibilidad del usuario con todos
+                        // Preparo la compatibilidad del usuario con todos y lo guardo en la sesion
                         Map<Integer, Integer> puntuacion = InteresesDAO.compatibilidad(email);
+                        session.setAttribute("puntuacion", puntuacion);
                         
                         response.sendRedirect("../Vistas/home.jsp");
                     } else {
