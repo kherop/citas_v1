@@ -312,13 +312,12 @@ public class PersonaDAO {
     }
 
     // Método para eliminar persona
-    // Método para actualizar datos personales
     public static void eliminarPersona(String email) {
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
 
-            // Creo la consulta SQL, la ejecuto y la guardo
+            // Creo la consulta SQL, la ejecuto para eliminar de la tabla usuarios
             String sentencia = "DELETE FROM usuarios WHERE email = ?;";
 
             // Preparo la sentencia SQL
@@ -327,6 +326,12 @@ public class PersonaDAO {
 
             // Ejecuto la sentencia
             SQL_Preparada.executeUpdate();
+
+            // Borro de la tabla preferencias
+            InteresesDAO.eliminarIntereses(email);
+            
+            //Borro la table de asignacionRoles
+            AsignacionRolesDAO.eliminarAsignacion(email);
         } catch (SQLException ex) {
             Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
