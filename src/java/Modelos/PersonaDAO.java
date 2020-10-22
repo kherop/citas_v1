@@ -137,6 +137,42 @@ public class PersonaDAO {
         return persona;
     }
 
+    // Método para obtener una persona sin el pass p
+    public static Persona obtenerPersonaSeguraID(Integer idUsuario) {
+        Persona persona = null;
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "SELECT idUsuario, nombre, apellido, genero, email, img_perfil FROM usuarios WHERE idUsuario = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, idUsuario);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            if (Resultado_SQL.next()) {
+                persona = new Persona(
+                        Resultado_SQL.getInt("idUsuario"),
+                        Resultado_SQL.getString("nombre"),
+                        Resultado_SQL.getString("apellido"),
+                        Resultado_SQL.getString("genero"),
+                        Resultado_SQL.getString("email"),
+                        Resultado_SQL.getString("img_perfil"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo el valor
+        ConexionEstatica.cerrarBDD();
+        return persona;
+    }
+    
     // Metodo para comprobar el login con el email y la contraseña
     public static boolean login(String email, String password) {
         boolean existe = false;

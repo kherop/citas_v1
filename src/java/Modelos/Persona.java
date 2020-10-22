@@ -61,6 +61,17 @@ public class Persona {
         this.imgPerfil = imgPerfil;
 
     }
+    
+        // Constuctor recuperar una persona sin password por seguridad
+    public Persona(int idUsuario, String nombre, String apellido, String genero, String email, String imgPerfil) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.genero = genero;
+        this.email = email;
+        this.imgPerfil = imgPerfil;
+
+    }
 
     // Métodos setter
     public void setIdUsuario(int idUsuario) {
