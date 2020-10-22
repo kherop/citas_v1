@@ -51,4 +51,28 @@ public class AsignacionRolesDAO {
         ConexionEstatica.cerrarBDD();
     }
     
+    // Método para eliminar rol
+    public static void eliminarAsignacion(String email) {
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto para eliminar de la tabla usuarios
+            String sentencia = "DELETE FROM asignacionRoles WHERE idUsuario = (SELECT idUsuario FROM usuarios WHERE email = ?);";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, email);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
+    
 }

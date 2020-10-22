@@ -4,6 +4,9 @@
     Author     : luis
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="Modelos.Intereses"%>
 <%@page import="Modelos.InteresesDAO"%>
 <%@page import="Modelos.ConexionEstatica"%>
 <%@page import="java.util.LinkedList"%>
@@ -42,7 +45,7 @@
                         session.setAttribute("emailUsuario", email);
                         
                         // Preparo la compatibilidad del usuario con todos
-                        InteresesDAO.compatibilidad(email);
+                        Map<Integer, Integer> puntuacion = InteresesDAO.compatibilidad(email);
                         
                         response.sendRedirect("../Vistas/home.jsp");
                     } else {

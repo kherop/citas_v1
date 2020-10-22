@@ -163,7 +163,6 @@
                                         <p>Busca:</p>
                                         <%
                                             intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
-                                            System.out.println(intereses.getBusca());
                                             if (intereses.getBusca().equals("chicos")) {
                                         %>
                                         <p>Chico</p>
