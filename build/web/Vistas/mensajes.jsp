@@ -4,6 +4,9 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.ArchivoMensaje"%>
+<%@page import="Modelos.ArchivoMensajeDAO"%>
+<%@page import="Auxiliar.Constantes"%>
 <%@page import="Modelos.AsignacionRolesDAO"%>
 <%@page import="Modelos.Mensaje"%>
 <%@page import="Modelos.MensajeDAO"%>
@@ -148,22 +151,45 @@
 
                         <%                            // Tiene solicitudes recibidas las muestro
                             if (mensajesRecibidos != null) {
+
                         %>
 
                         <div class="row text-align-center">
                             <div class="col">
-                                <h1>Mensajes recibidos</h1>
+                                <h1>Mensajes recibidos (Me he quedado desarrollando por aqui, deja responder, pero no soy capaz de mostrar el archivo adjunto, creo que esta protegida la ruta)</h1>
                             </div>
                         </div>
 
                         <div class="row flex-wrap">
-                            <%
+                            <%                                
                                 for (Mensaje mensaje : mensajesRecibidos) {
+                                    Persona remitente = PersonaDAO.obtenerPersonaSeguraID(mensaje.getIdRemitente());
+                                    ArchivoMensaje archivo = ArchivoMensajeDAO.obtenerArchivo(mensaje.getIdMensaje());
                             %>
                             <article class=" col tarjeta tarjeta-mini">
-                                <!-- Datos personales -->
-                                <!-- Imagen de perfil -->
-                                mensaje
+
+                                <p>Mensaje de:</p>
+                                <h3 class="text-align-center mb-1"><%=remitente.getNombre()%> <%=remitente.getApellido()%></h3>
+                                <hr class="hr-red-dark">
+                                <p>Asunto: <%=mensaje.getAsunto()%></p>
+                                <hr class="hr-red-dark">
+                                <p>Mensaje</p>
+                                <p><%=mensaje.getCuerpo()%></p>
+                                <hr class="hr-red-dark">
+  
+                                <a>ruta archivo</a>
+                                
+                                   <!-- Interaction -->
+                                    <div class="row interaccion mb-1 justify-content-space-between">
+                                        <form name="mensaje_tarjeta" action="../Controladores/controlador_mensaje.jsp" method="POST">
+                                            <input type="text" name="idUsuario" value="<%=mensaje.getIdRemitente()%>" class="d-none"/>
+                                            <button type="submit" name="mensaje_tarjeta">Responder<i class="material-icons">mail_outline</i></button>
+                                        </form>
+                                        <form name="eliminar_amistad" action="../Controladores/controlador_amigos.jsp" method="POST">
+                                            <input type="text" name="idUsuario" value="<%=mensaje.getIdRemitente()%>" class="d-none"/>
+                                            <button type="submit" name="eliminar_amistad" class="d-flex align-items-center" value="eliminar:mensaje"><i class="material-icons">delete_outline</i></button>
+                                        </form>
+                                    </div>
 
                             </article>
                             <%
