@@ -19,7 +19,14 @@ function ctrlMenuLateral() {
 var file = document.getElementById('file');
 var preview = document.getElementById('preview');
 
-file.addEventListener('change', function() {  
-  preview.src = URL.createObjectURL(this.files[0]);
+file.addEventListener('change', function () {
+    preview.src = URL.createObjectURL(this.files[0]);
 }, false);
+
+
+// Funcion para cambiar indicar al usuario que ha subido un archivo en el mensaje
+function cambiarTexto(oFileInput, sTargetID) {
+
+    document.getElementById(sTargetID).value = "Archivo seleccionado";
+}
 

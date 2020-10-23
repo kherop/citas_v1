@@ -49,6 +49,7 @@ public class MensajeDAO {
                         Resultado_SQL.getString("asunto"),
                         Resultado_SQL.getDate("fecha"),
                         Resultado_SQL.getString("cuerpo"),
+                        Resultado_SQL.getString("archivo"),
                         Resultado_SQL.getInt("leido"));
                 mensajesBD.add(mensaje);
             }
@@ -62,7 +63,7 @@ public class MensajeDAO {
     }
     
     
-    // Método para crear un nuevo mensaje idMensaje lo genera la BDD y la fecha pone la current_time, leido para a 0
+    // Método para crear un nuevo mensaje idMensaje lo genera la BDD y la fecha pone la current_time, leido para a 0 y sin archivo
     public static void nuevoMensaje(int idRemitente, int idDestinatario, String asunto, String cuerpo) {
 
         try {
@@ -78,6 +79,34 @@ public class MensajeDAO {
             SQL_Preparada.setInt(2, idDestinatario);
             SQL_Preparada.setString(3, asunto);
             SQL_Preparada.setString(4, cuerpo);
+            
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
+        
+    // Método para crear un nuevo mensaje idMensaje lo genera la BDD y la fecha pone la current_time, leido para a 0 y con archivo
+    public static void nuevoMensaje(int idRemitente, int idDestinatario, String asunto, String cuerpo, String archivo) {
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "INSERT INTO mensajes (idRemitente, idDestinatario, asunto, cuerpo) VALUES (?, ?, ?, ?, ?);";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, idRemitente);
+            SQL_Preparada.setInt(2, idDestinatario);
+            SQL_Preparada.setString(3, asunto);
+            SQL_Preparada.setString(4, cuerpo);
+            SQL_Preparada.setString(5, archivo);
             
             // Ejecuto la sentencia
             SQL_Preparada.executeUpdate();

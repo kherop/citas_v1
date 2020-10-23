@@ -48,6 +48,8 @@
                 Map<Integer, Integer> puntuacion = (Map<Integer, Integer>) session.getAttribute("puntuacion");
                 // Recupero las amistades enviadas
                 LinkedList<Integer> amistadesEnviadas = AmigoDAO.amistadesEnviadas(email);
+                // Recupero las amistades recibidas
+                LinkedList<Integer> amistadesRecibidas = AmigoDAO.amistadesRecibidas(email);
 
             %>
 
@@ -80,7 +82,7 @@
             <div class="container w-100 m-0">
 
                 <section class="row flex-grow-1 home-flex">
-                    <!-- Menu laterial -->
+                    <!-- Menu lateral -->
                     <aside class="col m-0 menu-collapse" id="menu-lateral">
                         <!-- Boton menu -->
                         <button class="btn-aside" onclick="ctrlMenuLateral()">
@@ -143,6 +145,131 @@
                     <div class="container">
 
                         <%
+                            // Tiene solicitudes recibidas las muestro
+                            if (amistadesRecibidas != null) {
+                        %>
+
+                        <div class="row text-align-center">
+                            <div class="col">
+                                <h1>Solicitudes recibidas...</h1>
+                            </div>
+                        </div>
+
+                        <div class="row flex-wrap">
+                            <%
+                                for (int idUsuario : amistadesRecibidas) {
+                                    Persona uaux = PersonaDAO.obtenerPersonaSeguraID(idUsuario);
+                            %>
+                            <article class=" col tarjeta tarjeta-mini">
+                                <!-- Datos personales -->
+                                <!-- Imagen de perfil -->
+                                <div class="relative d-flex align-items-center img_perfil_container">
+                                    <div class="img_perfil_admin">
+                                        <img src="../Img/Perfil/<%=uaux.getImgPerfil()%>" id="imgPerfil">
+                                    </div>
+                                </div>
+                                <hr class="hr-red-dark">
+                                <!-- Nombre -->
+                                <h3 class="text-align-center mb-1"><%=uaux.getNombre()%> <%=uaux.getApellido()%></h3>
+                                <hr class="hr-red-dark">
+
+                                <!-- Iconos de interes --->
+                                <div class="row intereses">
+                                    <div class="col icono">
+                                        <p>Busca:</p>
+                                        <%
+                                            intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
+                                            if (intereses.getBusca().equals("chicos")) {
+                                        %>
+                                        <p>Chico</p>
+                                        <img src="../Img/png/chico.png"/>
+                                        <%
+                                        } else if (intereses.getBusca().equals("chicas")) {
+                                        %>
+                                        <p>Chica</p>
+                                        <img src="../Img/png/chica.png"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <p>Chico/Chica</p>
+                                        <img src="../Img/png/chico_chica.png"/>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                    <div class="col icono">
+                                        <p>Relación:</p>
+                                        <%
+                                            if (intereses.getTipoRelacion().equals("amistad")) {
+                                        %>
+                                        <p>Amistad</p>
+                                        <img src="../Img/png/amistad.png"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <p>Seria</p>
+                                        <img src="../Img/png/serio.png"/>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                    <div class="col icono">
+                                        <p>Interesa:</p>
+                                        <%
+                                            if (intereses.getHijos().equals("si")) {
+                                        %>
+                                        <p>Si</p>
+                                        <img src="../Img/png/hijos.png"/>
+                                        <%
+                                        } else {
+                                        %>
+                                        <p>No</p>
+                                        <img src="../Img/png/hijos.png"/>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                                <hr class="hr-red-dark">
+
+                                <!-- Barras de interes -->
+                                <div class="row flex-direction-column intereses mb-1">
+                                    <div class="col barras">
+                                        <label for="file">Artísticos:</label>
+                                        <progress value="<%=intereses.getArtisticos()%>" max="10"></progress>
+                                    </div>
+                                    <div class="col barras">
+                                        <label for="file">Políticos:</label>
+                                        <progress value="<%=intereses.getPoliticos()%>" max="10"></progress>
+                                    </div>
+                                    <div class="col barras">
+                                        <label for="file">Deportivos:</label>
+                                        <progress value="<%=intereses.getDeportivos()%>" max="10"></progress>
+                                    </div>
+                                </div>
+                                <hr class="hr-red-dark">
+
+                                <!-- Interaction -->
+                                <div class="row interaccion mb-1 justify-content-space-between">
+                                    <form name="mensaje_tarjeta" action="../Controladores/controlador_mensaje.jsp" method="POST">
+                                        <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
+                                        <button type="submit" name="mensaje_tarjeta"><i class="material-icons">mail_outline</i></button>
+                                    </form>
+                                    <form name="me_gusta_tarjeta" action="../Controladores/controlador_amigos.jsp" method="POST">
+                                        <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
+                                        <button type="submit" name="me_gusta_tarjeta" class="d-flex align-items-center" value="me_gusta_tarjeta">Me gusta <i class="material-icons">favorite</i></button>
+                                    </form>
+                                </div>
+
+                            </article>
+                            <%
+                                }
+
+                            %>
+                        </div>
+
+                        <%                            }
+
                             // Tiene solicitudes enviadas y pendientes las muestro
                             if (amistadesEnviadas != null) {
                         %>
@@ -277,10 +404,12 @@
                         </div>
 
                         <div class="row flex-wrap">
-                            <%                                // Recorro las puntuaciones posibles
+                            <%                               
+                                // Recorro las puntuaciones posibles
                                 // 0 mas compatible
                                 // 32 menso compatible
-                                for (int i = 0; i <= 32; i++) {
+                                for (int i = 0;
+                                i <= 32; i++) {
                                     // Recorro el map para buscar coincidencia con el indice
                                     for (Map.Entry<Integer, Integer> entry : puntuacion.entrySet()) {
                                         if (entry.getValue() == i) {

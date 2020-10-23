@@ -56,7 +56,7 @@ public class AmigoDAO {
 
     // Método para ver las amistades enviadas y pendientes de aceptar
     public static LinkedList amistadesEnviadas(String email) {
-        LinkedList usuarioBD = new LinkedList<>();
+        LinkedList usuariosBD = new LinkedList<>();
         int usuario;
 
         try {
@@ -76,6 +76,40 @@ public class AmigoDAO {
             // Si trae un resultado lo guardo en un objeto persona
             while (Resultado_SQL.next()) {
                 usuario = Resultado_SQL.getInt("idReceptor");
+                usuariosBD.add(usuario);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo los valores
+        ConexionEstatica.cerrarBDD();
+
+        return usuariosBD;
+    }
+    
+    // Método para ver las amistades recibidas
+    public static LinkedList amistadesRecibidas(String email) {
+        LinkedList usuarioBD = new LinkedList<>();
+        int usuario;
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "SELECT idEmisor FROM amigos WHERE idReceptor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'esperando';";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, email);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            while (Resultado_SQL.next()) {
+                usuario = Resultado_SQL.getInt("idEmisor");
                 usuarioBD.add(usuario);
             }
 
@@ -87,5 +121,6 @@ public class AmigoDAO {
 
         return usuarioBD;
     }
+    
 
 }
