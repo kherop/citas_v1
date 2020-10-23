@@ -19,12 +19,11 @@ public class Mensaje {
     
     // Atributos de clase
     int idMensaje;
-    int ideRemitente;
+    int idRemitente;
     int idDestinatario;
     String asunto;
     Date fecha;
     String cuerpo;
-    String archivo;
     int leido;
     
     // Constructores
@@ -32,75 +31,29 @@ public class Mensaje {
     public Mensaje() {
     }
 
-    public Mensaje(int idMensaje, int ideRemitente, int idDestinatario, String asunto, Date fecha, String cuerpo, String archivo, int leido) {
+    public Mensaje(int idMensaje, int idRemitente, int idDestinatario, String asunto, Date fecha, String cuerpo, int leido) {
         this.idMensaje = idMensaje;
-        this.ideRemitente = ideRemitente;
+        this.idRemitente = idRemitente;
         this.idDestinatario = idDestinatario;
         this.asunto = asunto;
         this.fecha = fecha;
         this.cuerpo = cuerpo;
-        this.archivo = archivo;
         this.leido = leido;
     }
 
-    public Mensaje(int ideRemitente, int idDestinatario, String asunto, String cuerpo, String archivo) {
-        this.ideRemitente = ideRemitente;
-        this.idDestinatario = idDestinatario;
-        this.asunto = asunto;
-        this.cuerpo = cuerpo;
-        this.archivo = archivo;
-    }
-
-    public Mensaje(int ideRemitente, int idDestinatario, String asunto, String cuerpo) {
-        this.ideRemitente = ideRemitente;
+    public Mensaje(int idRemitente, int idDestinatario, String asunto, String cuerpo) {
+        this.idRemitente = idRemitente;
         this.idDestinatario = idDestinatario;
         this.asunto = asunto;
         this.cuerpo = cuerpo;
     }
-    
-    
-    // Métodos setter
-
-    public void setIdMensaje(int idMensaje) {
-        this.idMensaje = idMensaje;
-    }
-
-    public void setIdeRemitente(int ideRemitente) {
-        this.ideRemitente = ideRemitente;
-    }
-
-    public void setIdDestinatario(int idDestinatario) {
-        this.idDestinatario = idDestinatario;
-    }
-
-    public void setAsusnto(String asunto) {
-        this.asunto = asunto;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setCuerpo(String cuerpo) {
-        this.cuerpo = cuerpo;
-    }
-
-    public void setLeido(int leido) {
-        this.leido = leido;
-    }
-
-    public void setArchivo(String archivo) {
-        this.archivo = archivo;
-    }
-    
-    // Métodos getter
 
     public int getIdMensaje() {
         return idMensaje;
     }
 
-    public int getIdeRemitente() {
-        return ideRemitente;
+    public int getIdRemitente() {
+        return idRemitente;
     }
 
     public int getIdDestinatario() {
@@ -123,16 +76,35 @@ public class Mensaje {
         return leido;
     }
 
-    public String getArchivo() {
-        return archivo;
+    public void setIdMensaje(int idMensaje) {
+        this.idMensaje = idMensaje;
     }
 
-    // Método toString
-
-    @Override
-    public String toString() {
-        return "Mensaje{" + "idMensaje=" + idMensaje + ", ideRemitente=" + ideRemitente + ", idDestinatario=" + idDestinatario + ", asunto=" + asunto + ", fecha=" + fecha + ", cuerpo=" + cuerpo + ", archivo=" + archivo + ", leido=" + leido + '}';
+    public void setIdRemitente(int idRemitente) {
+        this.idRemitente = idRemitente;
     }
+
+    public void setIdDestinatario(int idDestinatario) {
+        this.idDestinatario = idDestinatario;
+    }
+
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
+    }
+
+    public void setLeido(int leido) {
+        this.leido = leido;
+    }
+
+    
     
     
     

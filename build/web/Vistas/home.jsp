@@ -78,7 +78,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="relative">
+                        <a href="mensajes.jsp" class="relative">
                             <i class="material-icons">people_outline</i>
                             <span class="mensaje_info">14</span>
                         </a>
