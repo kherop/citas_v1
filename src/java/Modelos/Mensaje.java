@@ -21,9 +21,10 @@ public class Mensaje {
     int idMensaje;
     int ideRemitente;
     int idDestinatario;
-    String asusnto;
+    String asunto;
     Date fecha;
     String cuerpo;
+    String archivo;
     int leido;
     
     // Constructores
@@ -31,23 +32,31 @@ public class Mensaje {
     public Mensaje() {
     }
 
-    public Mensaje(int idMensaje, int ideRemitente, int idDestinatario, String asusnto, Date fecha, String cuerpo, int leido) {
+    public Mensaje(int idMensaje, int ideRemitente, int idDestinatario, String asunto, Date fecha, String cuerpo, String archivo, int leido) {
         this.idMensaje = idMensaje;
         this.ideRemitente = ideRemitente;
         this.idDestinatario = idDestinatario;
-        this.asusnto = asusnto;
+        this.asunto = asunto;
         this.fecha = fecha;
         this.cuerpo = cuerpo;
+        this.archivo = archivo;
         this.leido = leido;
     }
 
-    public Mensaje(int ideRemitente, int idDestinatario, String asusnto, String cuerpo) {
+    public Mensaje(int ideRemitente, int idDestinatario, String asunto, String cuerpo, String archivo) {
         this.ideRemitente = ideRemitente;
         this.idDestinatario = idDestinatario;
-        this.asusnto = asusnto;
+        this.asunto = asunto;
+        this.cuerpo = cuerpo;
+        this.archivo = archivo;
+    }
+
+    public Mensaje(int ideRemitente, int idDestinatario, String asunto, String cuerpo) {
+        this.ideRemitente = ideRemitente;
+        this.idDestinatario = idDestinatario;
+        this.asunto = asunto;
         this.cuerpo = cuerpo;
     }
-    
     
     
     // Métodos setter
@@ -64,8 +73,8 @@ public class Mensaje {
         this.idDestinatario = idDestinatario;
     }
 
-    public void setAsusnto(String asusnto) {
-        this.asusnto = asusnto;
+    public void setAsusnto(String asunto) {
+        this.asunto = asunto;
     }
 
     public void setFecha(Date fecha) {
@@ -78,6 +87,10 @@ public class Mensaje {
 
     public void setLeido(int leido) {
         this.leido = leido;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
     }
     
     // Métodos getter
@@ -94,8 +107,8 @@ public class Mensaje {
         return idDestinatario;
     }
 
-    public String getAsusnto() {
-        return asusnto;
+    public String getAsunto() {
+        return asunto;
     }
 
     public Date getFecha() {
@@ -110,10 +123,15 @@ public class Mensaje {
         return leido;
     }
 
+    public String getArchivo() {
+        return archivo;
+    }
+
     // Método toString
+
     @Override
     public String toString() {
-        return "mensajes{" + "idMensaje=" + idMensaje + ", ideRemitente=" + ideRemitente + ", idDestinatario=" + idDestinatario + ", asusnto=" + asusnto + ", fecha=" + fecha + ", cuerpo=" + cuerpo + ", leido=" + leido + '}';
+        return "Mensaje{" + "idMensaje=" + idMensaje + ", ideRemitente=" + ideRemitente + ", idDestinatario=" + idDestinatario + ", asunto=" + asunto + ", fecha=" + fecha + ", cuerpo=" + cuerpo + ", archivo=" + archivo + ", leido=" + leido + '}';
     }
     
     
