@@ -55,6 +55,13 @@
                 int idUsuarioRol = PersonaDAO.obtenerID(email);
                 int rolUsuario = AsignacionRolesDAO.comprobarRol(idUsuarioRol);
                 session.setAttribute("rolUsuario", rolUsuario);
+                // Creo una variable de aplicacion para guardar los usuarios conectados
+                LinkedList usGlobales = (LinkedList) application.getAttribute("usGlobales");
+                if (usGlobales == null) {
+                    usGlobales = new LinkedList<>();
+                }  
+                usGlobales.add(idUsuarioRol);
+                application.setAttribute("usGlobales", usGlobales);
 
             %>
 
@@ -78,7 +85,7 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="material-icons">exit_to_app</i></a>
+                        <a href="../Controladores/controlador_global.jsp?opc=2"><i class="material-icons">exit_to_app</i></a>
                     </li>
                 </ul>
             </nav>
@@ -180,7 +187,7 @@
                                 <hr class="hr-red-dark">
 
                                 <!-- Iconos de interes --->
-                                <div class="row intereses">
+                                <div class="row intereses home-flex">
                                     <div class="col icono">
                                         <p>Busca:</p>
                                         <%
@@ -306,7 +313,7 @@
 
                                 <!-- Iconos de interes --->
                                 <div class="row intereses">
-                                    <div class="col icono">
+                                    <div class="col icono home-flex">
                                         <p>Busca:</p>
                                         <%
                                             intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
@@ -438,7 +445,7 @@
 
                                 <!-- Iconos de interes --->
                                 <div class="row intereses">
-                                    <div class="col icono">
+                                    <div class="col icono home-flex">
                                         <p>Busca:</p>
                                         <%
                                             intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
