@@ -75,4 +75,35 @@ public class AsignacionRolesDAO {
         ConexionEstatica.cerrarBDD();
     }
     
+    // Método para comprobar el rol de usuario
+    // Método para comprabar si existe una persona pasandole el email
+    public static int comprobarRol(int idUsuario) {
+        int rol = 0;
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "SELECT idRol FROM asignacionRoles WHERE idUsuario = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, idUsuario);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            if (Resultado_SQL.next()) {
+                rol = Resultado_SQL.getInt("idRol");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo el valor
+        ConexionEstatica.cerrarBDD();
+        return rol;
+    }
+    
 }

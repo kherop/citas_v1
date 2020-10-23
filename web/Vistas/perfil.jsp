@@ -44,6 +44,8 @@
                 // por si no la cambia no le ponga la default
                 String imgPerfil = usuario.getImgPerfil();
                 session.setAttribute("imgUsuario", imgPerfil);
+                // Recupero el rol de usuario
+                int rolUsuario = (int) session.getAttribute("rolUsuario");
 
             %>
 
@@ -67,7 +69,7 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="material-icons">exit_to_app</i></a>
+                        <a href="../Controladores/controlador_global.jsp?opc=2"><i class="material-icons">exit_to_app</i></a>
                     </li>
                 </ul>
             </nav>
@@ -116,17 +118,20 @@
                                     <span>Mensajes</span>
                                 </a>
                             </li>
+                            <%
+                                // Si es administrador habilito la administracion
+                                if (rolUsuario == 1) {
+                            %>
                             <li>
                                 <a href="administrar.jsp" class="relative">
                                     <i class="material-icons">edit</i>
                                     <span>Administrar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="material-icons">exit_to_app</i>
-                                    <span>Salir</span>
-                                </a>
+                            <%
+                                }
+
+                            %>
                             </li>
                         </ul>
                     </aside>

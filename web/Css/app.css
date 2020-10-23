@@ -59,6 +59,8 @@ nav {
     position: sticky;
     top: 0;
     z-index: 10;
+    animation-name: cambioColor;
+    animation-duration: 3s;
 }
 
 /* Barra navegacion home */
@@ -472,6 +474,8 @@ input:focus, select:focus {
     bottom: 55px;
     left: 40px;
     width: 25%;
+    animation-duration: 3s;
+    animation-name: slidein;
 }
 
 /* ------------------------ Página error login ------------------------------ */
@@ -739,5 +743,26 @@ article.error-login {
         bottom: 45px;
         left: 40px;
         width: 20%;
+    }
+}
+/* ----------------------- Animaciones entrada ------------------------------ */
+@keyframes slidein {
+    from {
+        left: -200px;
+        visibility: hidden;
+    }
+
+    to {
+        left: 40px;
+        visibility: visible;
+    }
+}
+
+@keyframes cambioColor {
+    from {
+        background-color: var(--color-red);
+    }
+    to {
+        background-color: var(--color-blue);
     }
 }

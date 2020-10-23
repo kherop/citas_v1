@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.AsignacionRolesDAO"%>
 <%@page import="Modelos.AmigoDAO"%>
 <%@page import="Modelos.AmigoDAO"%>
 <%@page import="java.util.Map"%>
@@ -50,6 +51,17 @@
                 LinkedList<Integer> amistadesEnviadas = AmigoDAO.amistadesEnviadas(email);
                 // Recupero las amistades recibidas
                 LinkedList<Integer> amistadesRecibidas = AmigoDAO.amistadesRecibidas(email);
+                // Recupero el rol y lo guardo en la sesion
+                int idUsuarioRol = PersonaDAO.obtenerID(email);
+                int rolUsuario = AsignacionRolesDAO.comprobarRol(idUsuarioRol);
+                session.setAttribute("rolUsuario", rolUsuario);
+                // Creo una variable de aplicacion para guardar los usuarios conectados
+                LinkedList usGlobales = (LinkedList) application.getAttribute("usGlobales");
+                if (usGlobales == null) {
+                    usGlobales = new LinkedList<>();
+                }  
+                usGlobales.add(idUsuarioRol);
+                application.setAttribute("usGlobales", usGlobales);
 
             %>
 
@@ -73,7 +85,7 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="material-icons">exit_to_app</i></a>
+                        <a href="../Controladores/controlador_global.jsp?opc=2"><i class="material-icons">exit_to_app</i></a>
                     </li>
                 </ul>
             </nav>
@@ -124,18 +136,20 @@
                                     <span>Mensajes</span>
                                 </a>
                             </li>
+                            <%
+                                // Si es administrador habilito la administracion
+                                if (rolUsuario == 1) {
+                            %>
                             <li>
                                 <a href="administrar.jsp" class="relative">
                                     <i class="material-icons">edit</i>
                                     <span>Administrar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="material-icons">exit_to_app</i>
-                                    <span>Salir</span>
-                                </a>
-                            </li>
+                            <%
+                                }
+
+                            %>
                         </ul>
                     </aside>
 
@@ -144,8 +158,7 @@
                     <!-- Solicitudes enviadas si las hay -->
                     <div class="container">
 
-                        <%
-                            // Tiene solicitudes recibidas las muestro
+                        <%                            // Tiene solicitudes recibidas las muestro
                             if (amistadesRecibidas != null) {
                         %>
 
@@ -174,7 +187,7 @@
                                 <hr class="hr-red-dark">
 
                                 <!-- Iconos de interes --->
-                                <div class="row intereses">
+                                <div class="row intereses home-flex">
                                     <div class="col icono">
                                         <p>Busca:</p>
                                         <%
@@ -300,7 +313,7 @@
 
                                 <!-- Iconos de interes --->
                                 <div class="row intereses">
-                                    <div class="col icono">
+                                    <div class="col icono home-flex">
                                         <p>Busca:</p>
                                         <%
                                             intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
@@ -404,12 +417,11 @@
                         </div>
 
                         <div class="row flex-wrap">
-                            <%                               
-                                // Recorro las puntuaciones posibles
+                            <%                                // Recorro las puntuaciones posibles
                                 // 0 mas compatible
                                 // 32 menso compatible
                                 for (int i = 0;
-                                i <= 32; i++) {
+                                        i <= 32; i++) {
                                     // Recorro el map para buscar coincidencia con el indice
                                     for (Map.Entry<Integer, Integer> entry : puntuacion.entrySet()) {
                                         if (entry.getValue() == i) {
@@ -433,7 +445,7 @@
 
                                 <!-- Iconos de interes --->
                                 <div class="row intereses">
-                                    <div class="col icono">
+                                    <div class="col icono home-flex">
                                         <p>Busca:</p>
                                         <%
                                             intereses = InteresesDAO.obtenerIntereses(uaux.getEmail());
