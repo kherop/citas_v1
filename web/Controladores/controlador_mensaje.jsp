@@ -21,6 +21,7 @@
                 // Lo redirijo a la página para enviar el nuevo usuario
                 response.sendRedirect("../Vistas/mensaje.jsp");
             }
+            
         %>
 
     </body>

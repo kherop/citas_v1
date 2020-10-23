@@ -90,10 +90,12 @@
             if (!archivoCarga) {
                 // Guardo el nuevo mensaje en la BDD sin archivo
                 MensajeDAO.nuevoMensaje(idRemitente, idDestinatario, asunto, cuerpo);
+                response.sendRedirect("../Vistas/home.jsp");
             } else {
                 MensajeDAO.nuevoMensaje(idRemitente, idDestinatario, asunto, cuerpo);
                 int idMensaje = MensajeDAO.obtenerID(idRemitente);
                 ArchivoMensajeDAO.nuevoArchivo(idMensaje, archivo);
+                response.sendRedirect("../Vistas/home.jsp");
             }
         %>
     </body>
