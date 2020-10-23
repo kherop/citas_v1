@@ -253,9 +253,9 @@
                                         <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
                                         <button type="submit" name="mensaje_tarjeta"><i class="material-icons">mail_outline</i></button>
                                     </form>
-                                    <form name="me_gusta_tarjeta" action="../Controladores/controlador_amigos.jsp" method="POST">
+                                    <form name="eliminar_amistad" action="../Controladores/controlador_amigos.jsp" method="POST">
                                         <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
-                                        <button type="submit" name="aceptar_amistad" class="d-flex align-items-center" value="me_gusta_tarjeta">Aceptar <i class="material-icons">how_to_reg</i></button>
+                                        <button type="submit" name="eliminar_amistad" class="d-flex align-items-center" value="eliminar:mensaje">Eliminar <i class="material-icons">delete_outline</i></button>
                                     </form>
                                 </div>
 

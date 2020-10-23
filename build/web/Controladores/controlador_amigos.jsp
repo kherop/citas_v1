@@ -39,6 +39,16 @@
                 response.sendRedirect("../Vistas/home.jsp");
             }
 
+            // Elimino amistad
+            if (request.getParameter("eliminar_amistad") != null) {
+                String email = (String) session.getAttribute("emailUsuario");
+                int idUno = PersonaDAO.obtenerID(email);
+                int idDos = Integer.parseInt(request.getParameter("idUsuario"));
+                AmigoDAO.eliminarAmistad(idUno, idDos);
+                // Redirecciono a la pagina home
+                response.sendRedirect("../Vistas/amigos.jsp");
+            }
+
         %>
 
     </body>

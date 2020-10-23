@@ -62,7 +62,7 @@ public class AmigoDAO {
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
-            
+
             // Creo la consulta SQL, la ejecuto y la guardo
             String sentencia = "SELECT idReceptor FROM amigos WHERE idEmisor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'esperando';";
 
@@ -87,7 +87,7 @@ public class AmigoDAO {
 
         return usuariosBD;
     }
-    
+
     // Método para ver las amistades recibidas
     public static LinkedList amistadesRecibidas(String email) {
         LinkedList usuarioBD = new LinkedList<>();
@@ -96,7 +96,7 @@ public class AmigoDAO {
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
-            
+
             // Creo la consulta SQL, la ejecuto y la guardo
             String sentencia = "SELECT idEmisor FROM amigos WHERE idReceptor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'esperando';";
 
@@ -121,7 +121,7 @@ public class AmigoDAO {
 
         return usuarioBD;
     }
-    
+
     // Método para aceptar amistad
     public static void aceptarAmistad(int idEmisor) {
 
@@ -145,7 +145,7 @@ public class AmigoDAO {
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
     }
-    
+
     // Método para ver las amistades recibidas
     public static LinkedList amistadesAceptadas(String email) {
         LinkedList usuarioBD = new LinkedList<>();
@@ -154,7 +154,7 @@ public class AmigoDAO {
         try {
             // Creo una conexion
             ConexionEstatica.nuevaConexion();
-            
+
             // Creo la consulta SQL, esta consulta guarda las solicitudes que ha enviado
             // el usuario y estan aceptadas, guardo los receptores de esas amistadas
             String sentencia = "SELECT idReceptor FROM amigos WHERE idEmisor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'aceptada';";
@@ -171,15 +171,15 @@ public class AmigoDAO {
                 usuario = Resultado_SQL.getInt("idEmisor");
                 usuarioBD.add(usuario);
             }
-            
+
             // Creo la segunda consulta SQL, esta son las que el esta
             // como receptor y han sido aceptadas, es decir guardo los emisores aceptadas
             sentencia = "SELECT idEmisor FROM amigos WHERE idReceptor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'aceptada';";
-            
+
             // Preparo la sentencia SQL
             SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
             SQL_Preparada.setString(1, email);
-            
+
             // Ejecuto la sentencia SQL y la guardo
             Resultado_SQL = SQL_Preparada.executeQuery();
 
@@ -196,6 +196,33 @@ public class AmigoDAO {
         ConexionEstatica.cerrarBDD();
 
         return usuarioBD;
+    }
+
+    // Método para eliminar amistad
+    public static void eliminarAmistad(int idUno, int idDos) {
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto para eliminar de la tabla usuarios
+            String sentencia = "DELETE FROM `amigos` WHERE (idEmisor = ? AND idReceptor = ?) OR (idEmisor = ? AND idReceptor = ?);";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, idUno);
+            SQL_Preparada.setInt(2, idDos);
+            SQL_Preparada.setInt(3, idDos);
+            SQL_Preparada.setInt(4, idUno);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
     }
 
 }
