@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/ConexionEstatica.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/mensaje.jsp</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/ArchivoMensajeDAO.java</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/AsignacionRolesDAO.java</file>
             <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/PersonaDAO.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/MensajeDAO.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/ArchivoMensaje.java</file>
-            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Controladores/controlador_enviar_mensaje.jsp</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/home.jsp</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/perfil.jsp</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/src/java/Modelos/Persona.java</file>
+            <file>file:/home/luis/cursoDaw/DWES/JSP/citas_v1/web/Vistas/amigos.jsp</file>
         </group>
     </open-files>
 </project-private>

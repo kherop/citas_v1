@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.AsignacionRolesDAO"%>
 <%@page import="Modelos.AmigoDAO"%>
 <%@page import="Modelos.AmigoDAO"%>
 <%@page import="java.util.Map"%>
@@ -50,6 +51,10 @@
                 LinkedList<Integer> amistadesEnviadas = AmigoDAO.amistadesEnviadas(email);
                 // Recupero las amistades recibidas
                 LinkedList<Integer> amistadesRecibidas = AmigoDAO.amistadesRecibidas(email);
+                // Recupero el rol y lo guardo en la sesion
+                int idUsuarioRol = PersonaDAO.obtenerID(email);
+                int rolUsuario = AsignacionRolesDAO.comprobarRol(idUsuarioRol);
+                session.setAttribute("rolUsuario", rolUsuario);
 
             %>
 
@@ -124,18 +129,20 @@
                                     <span>Mensajes</span>
                                 </a>
                             </li>
+                            <%
+                                // Si es administrador habilito la administracion
+                                if (rolUsuario == 1) {
+                            %>
                             <li>
                                 <a href="administrar.jsp" class="relative">
                                     <i class="material-icons">edit</i>
                                     <span>Administrar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="material-icons">exit_to_app</i>
-                                    <span>Salir</span>
-                                </a>
-                            </li>
+                            <%
+                                }
+
+                            %>
                         </ul>
                     </aside>
 
@@ -144,8 +151,7 @@
                     <!-- Solicitudes enviadas si las hay -->
                     <div class="container">
 
-                        <%
-                            // Tiene solicitudes recibidas las muestro
+                        <%                            // Tiene solicitudes recibidas las muestro
                             if (amistadesRecibidas != null) {
                         %>
 
@@ -404,12 +410,11 @@
                         </div>
 
                         <div class="row flex-wrap">
-                            <%                               
-                                // Recorro las puntuaciones posibles
+                            <%                                // Recorro las puntuaciones posibles
                                 // 0 mas compatible
                                 // 32 menso compatible
                                 for (int i = 0;
-                                i <= 32; i++) {
+                                        i <= 32; i++) {
                                     // Recorro el map para buscar coincidencia con el indice
                                     for (Map.Entry<Integer, Integer> entry : puntuacion.entrySet()) {
                                         if (entry.getValue() == i) {

@@ -42,6 +42,8 @@
 
                 // Recupero el usuario de forma segura sin password
                 Persona usuario = PersonaDAO.obtenerPersonaSegura(email);
+                // Recupero el rol de usuario
+                int rolUsuario = (int) session.getAttribute("rolUsuario");
 
             %>
 
@@ -115,18 +117,20 @@
                                     <span>Mensajes</span>
                                 </a>
                             </li>
+                            <%
+                                // Si es administrador habilito la administracion
+                                if (rolUsuario == 1) {
+                            %>
                             <li>
                                 <a href="administrar.jsp" class="relative">
                                     <i class="material-icons">edit</i>
                                     <span>Administrar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="material-icons">exit_to_app</i>
-                                    <span>Salir</span>
-                                </a>
-                            </li>
+                            <%
+                                }
+
+                            %>
                         </ul>
                     </aside>
 

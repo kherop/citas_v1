@@ -48,6 +48,8 @@
                 Map<Integer, Integer> puntuacion = (Map<Integer, Integer>) session.getAttribute("puntuacion");
                 // Recupero las amistades enviadas
                 LinkedList<Integer> amistadesAceptadas = AmigoDAO.amistadesAceptadas(email);
+                // Recupero el rol de usuario
+                int rolUsuario = (int) session.getAttribute("rolUsuario");
 
             %>
 
@@ -122,18 +124,20 @@
                                     <span>Mensajes</span>
                                 </a>
                             </li>
+                            <%
+                                // Si es administrador habilito la administracion
+                                if (rolUsuario == 1) {
+                            %>
                             <li>
                                 <a href="administrar.jsp" class="relative">
                                     <i class="material-icons">edit</i>
                                     <span>Administrar</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="material-icons">exit_to_app</i>
-                                    <span>Salir</span>
-                                </a>
-                            </li>
+                            <%
+                                }
+
+                            %>
                         </ul>
                     </aside>
 
@@ -142,8 +146,7 @@
                     <!-- Solicitudes enviadas si las hay -->
                     <div class="container">
 
-                        <%
-                            // Tiene solicitudes recibidas las muestro
+                        <%                            // Tiene solicitudes recibidas las muestro
                             if (amistadesAceptadas != null) {
                         %>
 
