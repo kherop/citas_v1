@@ -67,7 +67,7 @@
 
                     </li>
                     <li>
-                        <a href="#"><i class="material-icons">exit_to_app</i></a>
+                        <a href="../Controladores/controlador_global.jsp?opc=2"><i class="material-icons">exit_to_app</i></a>
                     </li>
                 </ul>
             </nav>
