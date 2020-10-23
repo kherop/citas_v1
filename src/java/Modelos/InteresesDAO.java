@@ -253,13 +253,21 @@ public class InteresesDAO {
             // Evaluamos la puntuacion de arte
             resultado += Math.abs(interesUsuario.getPoliticos() - interesesAux.getPoliticos());
 
-            // Si no es el mismo lo guardo en el HashMap
+            // Si no es él mismo lo guardo en el HashMap
             if (!(interesUsuario.getIdUsuario() == interesesAux.getIdUsuario())) {
                 puntuacion.put(interesesAux.getIdUsuario(), resultado);
             }
+
         }
 
         ordenada.putAll(puntuacion);
+
+        // Quito de la lista a mostrar las amistades enviadas y pendientes de confirmar
+        // Recupero las amistades enviadas
+        LinkedList<Integer> amistadesEnviadas = AmigoDAO.amistadesEnviadas(email);
+        for (Integer idReceptor : amistadesEnviadas) {
+            //ordenada.entrySet().removeIf(entry -> !ordenada.contains("idReceptor));
+        }
 
         for (Map.Entry<Integer, Integer> entry : ordenada.entrySet()) {
             System.out.println("Key = " + entry.getKey()

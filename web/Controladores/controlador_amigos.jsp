@@ -19,11 +19,15 @@
 
             // Recupero el email de usuario de la sesion
             if (request.getParameter("me_gusta_tarjeta") != null) {
+                // Recuperos los id de los involucrados y lanzo la solicitud
                 String email = (String) session.getAttribute("emailUsuario");
                 int idEmisor = PersonaDAO.obtenerID(email);
                 int idReceptor = Integer.parseInt((String) request.getParameter("idUsuario"));
                 String estado = "esperando";
                 amigoDAO.nuevaSolicitudAmistad(idEmisor, idReceptor, estado);
+                
+                // Redirecciono a la pagina home
+                response.sendRedirect("../Vistas/home.jsp");
             }
         %>
 
