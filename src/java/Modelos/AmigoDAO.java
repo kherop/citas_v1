@@ -122,5 +122,80 @@ public class AmigoDAO {
         return usuarioBD;
     }
     
+    // Método para aceptar amistad
+    public static void aceptarAmistad(int idEmisor) {
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "UPDATE amigos SET estado = 'aceptada' WHERE idEmisor = ?;";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, idEmisor);
+
+            // Ejecuto la sentencia
+            SQL_Preparada.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Cierro la conexión con la BDD
+        ConexionEstatica.cerrarBDD();
+    }
+    
+    // Método para ver las amistades recibidas
+    public static LinkedList amistadesAceptadas(String email) {
+        LinkedList usuarioBD = new LinkedList<>();
+        int usuario;
+
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            
+            // Creo la consulta SQL, esta consulta guarda las solicitudes que ha enviado
+            // el usuario y estan aceptadas, guardo los receptores de esas amistadas
+            String sentencia = "SELECT idReceptor FROM amigos WHERE idEmisor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'aceptada';";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, email);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            while (Resultado_SQL.next()) {
+                usuario = Resultado_SQL.getInt("idEmisor");
+                usuarioBD.add(usuario);
+            }
+            
+            // Creo la segunda consulta SQL, esta son las que el esta
+            // como receptor y han sido aceptadas, es decir guardo los emisores aceptadas
+            sentencia = "SELECT idEmisor FROM amigos WHERE idReceptor = (SELECT idUsuario FROM usuarios WHERE email = ?) AND estado = 'aceptada';";
+            
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setString(1, email);
+            
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            while (Resultado_SQL.next()) {
+                usuario = Resultado_SQL.getInt("idEmisor");
+                usuarioBD.add(usuario);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo los valores
+        ConexionEstatica.cerrarBDD();
+
+        return usuarioBD;
+    }
 
 }

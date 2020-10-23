@@ -257,7 +257,7 @@
                                     </form>
                                     <form name="me_gusta_tarjeta" action="../Controladores/controlador_amigos.jsp" method="POST">
                                         <input type="text" name="idUsuario" value="<%=uaux.getIdUsuario()%>" class="d-none"/>
-                                        <button type="submit" name="me_gusta_tarjeta" class="d-flex align-items-center" value="me_gusta_tarjeta">Me gusta <i class="material-icons">favorite</i></button>
+                                        <button type="submit" name="aceptar_amistad" class="d-flex align-items-center" value="me_gusta_tarjeta">Aceptar <i class="material-icons">how_to_reg</i></button>
                                     </form>
                                 </div>
 

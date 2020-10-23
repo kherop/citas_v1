@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@page import="Modelos.ArchivoMensajeDAO"%>
 <%@page import="Modelos.PersonaDAO"%>
 <%@page import="Modelos.MensajeDAO"%>
 <%@page import="java.io.File"%>
@@ -91,7 +92,8 @@
                 MensajeDAO.nuevoMensaje(idRemitente, idDestinatario, asunto, cuerpo);
             } else {
                 MensajeDAO.nuevoMensaje(idRemitente, idDestinatario, asunto, cuerpo);
-
+                int idMensaje = MensajeDAO.obtenerID(idRemitente);
+                ArchivoMensajeDAO.nuevoArchivo(idMensaje, archivo);
             }
         %>
     </body>

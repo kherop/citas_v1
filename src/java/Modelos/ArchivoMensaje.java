@@ -26,6 +26,12 @@ public class ArchivoMensaje {
         this.rutaArchivo = rutaArchivo;
     }
 
+    public ArchivoMensaje(int idArchivos, int idMensaje, String rutaArchivo) {
+        this.idArchivos = idArchivos;
+        this.idMensaje = idMensaje;
+        this.rutaArchivo = rutaArchivo;
+    }
+
     // Getter
     public int getIdArchivos() {
         return idArchivos;

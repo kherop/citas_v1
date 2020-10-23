@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="Modelos.PersonaDAO"%>
-<%@page import="Modelos.amigoDAO"%>
+<%@page import="Modelos.AmigoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,11 +24,21 @@
                 int idEmisor = PersonaDAO.obtenerID(email);
                 int idReceptor = Integer.parseInt((String) request.getParameter("idUsuario"));
                 String estado = "esperando";
-                amigoDAO.nuevaSolicitudAmistad(idEmisor, idReceptor, estado);
-                
+                AmigoDAO.nuevaSolicitudAmistad(idEmisor, idReceptor, estado);
+
                 // Redirecciono a la pagina home
                 response.sendRedirect("../Vistas/home.jsp");
             }
+
+            // Aceptar invitacion de amigo
+            if (request.getParameter("aceptar_amistad") != null) {
+                int idEmisor = Integer.parseInt(request.getParameter("idUsuario"));
+                AmigoDAO.aceptarAmistad(idEmisor);
+
+                // Redirecciono a la pagina home
+                response.sendRedirect("../Vistas/home.jsp");
+            }
+
         %>
 
     </body>

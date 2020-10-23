@@ -83,7 +83,7 @@ public class MensajeDAO {
             // Ejecuto la sentencia
             SQL_Preparada.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Cierro la conexión con la BDD
@@ -111,11 +111,41 @@ public class MensajeDAO {
             // Ejecuto la sentencia
             SQL_Preparada.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(PersonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MensajeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         // Cierro la conexión con la BDD
         ConexionEstatica.cerrarBDD();
+    }
+    
+    // Método para buscar el idMensaje con la fecha mas reciente de ese remitente
+    public static int obtenerID(int idRemitente) {
+        int idMensaje = 0;
+        
+        try {
+            // Creo una conexion
+            ConexionEstatica.nuevaConexion();
+            // Creo la consulta SQL, la ejecuto y la guardo
+            String sentencia = "SELECT idMensaje FROM mensajes WHERE idRemitente = ? AND fecha = (SELECT MAX(fecha) FROM mensajes);";
+
+            // Preparo la sentencia SQL
+            SQL_Preparada = ConexionEstatica.getConexion().prepareStatement(sentencia);
+            SQL_Preparada.setInt(1, idRemitente);
+
+            // Ejecuto la sentencia SQL y la guardo
+            Resultado_SQL = SQL_Preparada.executeQuery();
+
+            // Si trae un resultado lo guardo en un objeto persona
+            if (Resultado_SQL.next()) {
+                idMensaje = Resultado_SQL.getInt("idMensaje");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionEstatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Cierro la conexión con la BDD y devuelvo el valor
+        ConexionEstatica.cerrarBDD();
+        return idMensaje;
     }
     
 }
